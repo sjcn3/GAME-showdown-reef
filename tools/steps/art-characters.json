@@ -1,0 +1,22 @@
+[
+  "eval:__anJiao.restart()",
+  "eval:__anJiao.goto('dock_exterior')",
+  "wait:900",
+  "settle",
+  "shot:shots/chars/01-dock.png",
+  "eval:__anJiao.give('bronze_emblem','badge_half','cut_mark','mint_cigarette','altered_manifest','ship_log','list_fragment')",
+  "eval:__anJiao.goto('warehouse_approach')",
+  "wait:600",
+  "settle",
+  "click-spot:radio",
+  "settle",
+  "click-spot:door",
+  "wait:700",
+  "settle",
+  "shot:shots/chars/02-confront-r1.png",
+  "hold-item:cut_mark",
+  "click-confront:crate",
+  "settle",
+  "shot:shots/chars/03-confront-r2.png",
+  "eval:__anJiao.confront()"
+]

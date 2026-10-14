@@ -1,0 +1,170 @@
+{
+  "url": "http://localhost:5199/?dev=1&t=1791998910346849",
+  "input": "mouse",
+  "steps": [
+    {
+      "step": "wait:2200",
+      "ok": true
+    },
+    {
+      "step": "eval:__anJiao.restart()",
+      "ok": true,
+      "value": "dock_exterior"
+    },
+    {
+      "step": "wait:900",
+      "ok": true
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 2,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "eval:__anJiao.clearSfx()",
+      "ok": true,
+      "value": "cleared"
+    },
+    {
+      "step": "shot:shots/p1h-00-start.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\p1h-00-start.png"
+    },
+    {
+      "step": "click-spot:zhou",
+      "ok": true,
+      "value": "zhou @ 646,890"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 5,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "assert:__anJiao.flags().includes('zhou_talked')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "assert:__anJiao.scene() === 'dock_exterior'",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "shot:shots/p1h-01-zhou-lines.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\p1h-01-zhou-lines.png"
+    },
+    {
+      "step": "click-spot:zhou",
+      "ok": true,
+      "value": "zhou @ 646,890"
+    },
+    {
+      "step": "wait:600",
+      "ok": true
+    },
+    {
+      "step": "assert:__anJiao.sfx().includes('searchAgain')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "assert:__anJiao.scene() === 'dock_exterior'",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "shot:shots/p1h-02-search-again.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\p1h-02-search-again.png"
+    },
+    {
+      "step": "wait:4200",
+      "ok": true
+    },
+    {
+      "step": "shot:shots/p1h-03-hint-gone.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\p1h-03-hint-gone.png"
+    },
+    {
+      "step": "assert:__anJiao.scene() === 'dock_exterior'",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "click-spot:zhou",
+      "ok": true,
+      "value": "zhou @ 646,890"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 8,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "assert:__anJiao.scene() === 'captain_cabin'",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "shot:shots/p1h-04-advanced.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\p1h-04-advanced.png"
+    },
+    {
+      "step": "eval:JSON.stringify({ items: __anJiao.items(), keys: __anJiao.keyCount(), clues: __anJiao.clueCount() })",
+      "ok": true,
+      "value": "{\"items\":[],\"keys\":0,\"clues\":0}"
+    },
+    {
+      "step": "assert:__anJiao.keyCount() === 0",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "assert:__anJiao.clueCount() === 0",
+      "ok": true,
+      "value": true
+    }
+  ],
+  "exceptions": [],
+  "consoleErrors": [],
+  "consoleAll": [
+    {
+      "level": "log",
+      "text": "%cPhaser v4.2.1 (WebGL | Web Audio)%c https://phaser.io/v4021 color: #ffffff; background-image: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAOCAYAAAAmL5yKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAARBJREFUeNpi/P//P0OHsPB/BiCoePuWkYFEwALSXJElzMBgLwE2CNkQxgWr/yMr/p8QimlBu5DQ//+8vBBco/ofzAe6imH+qv/53/6jYJAYSA4ZoxoANYTPKhiuCQZwGcJU+e4dqpMmvsDq14krV2MPAxDha2CMKvoXoiE/PBQUDgQD8j82UFae9B9bOIC8B9UD9gIjjIMN7Ns6lWHn4XMoYu62RgxO3tkMjIyMII2MYAOAtmFVhA+ADHf2ycGMRhANjUq8YO+WKWCvgAORIV8CkpDCrzIwsLIymC1qAtuAD4Bsh3sBmqAY3qcGwL2AC4DCpKtzHlgzOLWihwEuzTCN0GhDJHeYC4gByBphACDAAH2dDIxdjr+VAAAAAElFTkSuQmCC\"), linear-gradient(to bottom, #000814, #001d3d, #003566); background-repeat: no-repeat; background-position: 4px center, 0 0; padding: 2px 6px 2px 24px; background: transparent"
+    },
+    {
+      "level": "log",
+      "text": "[dev] window.__anJiao 已挂载"
+    }
+  ],
+  "failedRequests": [],
+  "ok": true
+}

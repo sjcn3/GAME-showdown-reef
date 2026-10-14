@@ -1,0 +1,326 @@
+{
+  "url": "http://localhost:5199/?dev=1&t=1791999092132576",
+  "input": "mouse",
+  "steps": [
+    {
+      "step": "eval:__anJiao.restart()",
+      "ok": true,
+      "value": "dock_exterior"
+    },
+    {
+      "step": "wait:1200",
+      "ok": true
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 2,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "eval:__anJiao.clearSfx()",
+      "ok": true,
+      "value": "cleared"
+    },
+    {
+      "step": "click-spot:zhou",
+      "ok": true,
+      "value": "zhou @ 646,890"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 5,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "assert:__anJiao.flags().includes('zhou_talked')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "click-spot:zhou",
+      "ok": true,
+      "value": "zhou @ 646,890"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 0,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "assert:__anJiao.sfx().includes('searchAgain')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "assert:__anJiao.scene() === 'dock_exterior'",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "click-spot:cigarette",
+      "ok": true,
+      "value": "cigarette @ 654,999"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 4,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "assert:__anJiao.sfx().includes('clue')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "click-spot:seal",
+      "ok": true,
+      "value": "seal @ 437,414"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 3,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "click-spot:puddle",
+      "ok": true,
+      "value": "puddle @ 166,945"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 2,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "hold-item:crowbar",
+      "ok": true,
+      "value": "crowbar @ 300,1170"
+    },
+    {
+      "step": "click-spot:vent",
+      "ok": true,
+      "value": "vent @ 211,671"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 4,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "assert:__anJiao.scene() === 'container_interior'",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "click-spot:wall",
+      "ok": true,
+      "value": "wall @ 623,530"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 3,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "hold-item:crowbar",
+      "ok": true,
+      "value": "crowbar @ 300,1170"
+    },
+    {
+      "step": "click-spot:crates",
+      "ok": true,
+      "value": "crates @ 360,728"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 4,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "assert:__anJiao.sfx().includes('document')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "hold-item:crowbar",
+      "ok": true,
+      "value": "already held"
+    },
+    {
+      "step": "click-spot:cache",
+      "ok": true,
+      "value": "cache @ 614,688"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 5,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "assert:__anJiao.sfx().includes('keyItem')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "assert:__anJiao.sfx().includes('flashback')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "eval:__anJiao.sfx()",
+      "ok": true,
+      "value": [
+        "hotspot",
+        "searchAgain",
+        "hotspot",
+        "hotspot",
+        "clue",
+        "hotspot",
+        "hotspot",
+        "hotspot",
+        "hotspot",
+        "clue",
+        "hotspot",
+        "clue",
+        "document",
+        "hotspot",
+        "keyItem",
+        "flashback"
+      ]
+    },
+    {
+      "step": "assert:__anJiao.sfx().filter((c) => c === 'hotspot').length === 9",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "assert:__anJiao.sfx().filter((c) => c === 'clue').length === 3",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "assert:__anJiao.sfx().filter((c) => c === 'keyItem').length === 1",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "assert:__anJiao.sfx().filter((c) => c === 'document').length === 1",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "assert:__anJiao.sfx().filter((c) => c === 'flashback').length === 1",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "assert:__anJiao.sfx().filter((c) => c === 'searchAgain').length === 1",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "assert:__anJiao.items().length === 7",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "shot:shots/p4-04-sfx-route.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\p4-04-sfx-route.png"
+    }
+  ],
+  "exceptions": [],
+  "consoleErrors": [],
+  "consoleAll": [
+    {
+      "level": "log",
+      "text": "%cPhaser v4.2.1 (WebGL | Web Audio)%c https://phaser.io/v4021 color: #ffffff; background-image: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAOCAYAAAAmL5yKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAARBJREFUeNpi/P//P0OHsPB/BiCoePuWkYFEwALSXJElzMBgLwE2CNkQxgWr/yMr/p8QimlBu5DQ//+8vBBco/ofzAe6imH+qv/53/6jYJAYSA4ZoxoANYTPKhiuCQZwGcJU+e4dqpMmvsDq14krV2MPAxDha2CMKvoXoiE/PBQUDgQD8j82UFae9B9bOIC8B9UD9gIjjIMN7Ns6lWHn4XMoYu62RgxO3tkMjIyMII2MYAOAtmFVhA+ADHf2ycGMRhANjUq8YO+WKWCvgAORIV8CkpDCrzIwsLIymC1qAtuAD4Bsh3sBmqAY3qcGwL2AC4DCpKtzHlgzOLWihwEuzTCN0GhDJHeYC4gByBphACDAAH2dDIxdjr+VAAAAAElFTkSuQmCC\"), linear-gradient(to bottom, #000814, #001d3d, #003566); background-repeat: no-repeat; background-position: 4px center, 0 0; padding: 2px 6px 2px 24px; background: transparent"
+    },
+    {
+      "level": "log",
+      "text": "[dev] window.__anJiao 已挂载"
+    }
+  ],
+  "failedRequests": [],
+  "ok": true
+}

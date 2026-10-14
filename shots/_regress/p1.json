@@ -1,0 +1,424 @@
+{
+  "url": "http://localhost:5199/?dev=1&t=1791998881218210",
+  "input": "mouse",
+  "steps": [
+    {
+      "step": "wait:2200",
+      "ok": true
+    },
+    {
+      "step": "eval:__anJiao.goto('dock_exterior')",
+      "ok": true,
+      "value": "dock_exterior"
+    },
+    {
+      "step": "wait:900",
+      "ok": true
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 2,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "shot:shots/p1-01-enter.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\p1-01-enter.png"
+    },
+    {
+      "step": "eval:__anJiao.clearSfx()",
+      "ok": true,
+      "value": "cleared"
+    },
+    {
+      "step": "click-spot:puddle",
+      "ok": true,
+      "value": "puddle @ 166,945"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 2,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "assert:__anJiao.items().includes('crowbar')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "assert:__anJiao.sfx().includes('hotspot')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "shot:shots/p1-02-crowbar.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\p1-02-crowbar.png"
+    },
+    {
+      "step": "click-spot:seal",
+      "ok": true,
+      "value": "seal @ 437,414"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 3,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "assert:__anJiao.items().includes('customs_seal')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "shot:shots/p1-03-seal.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\p1-03-seal.png"
+    },
+    {
+      "step": "click-spot:cigarette",
+      "ok": true,
+      "value": "cigarette @ 654,999"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 4,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "assert:__anJiao.items().includes('mint_cigarette')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "shot:shots/p1-04-cigarette.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\p1-04-cigarette.png"
+    },
+    {
+      "step": "click-spot:vent",
+      "ok": true,
+      "value": "vent @ 211,671"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 2,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "assert:__anJiao.scene() === 'dock_exterior'",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "shot:shots/p1-05-vent-rusty.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\p1-05-vent-rusty.png"
+    },
+    {
+      "step": "hold-item:crowbar",
+      "ok": true,
+      "value": "crowbar @ 60,1170"
+    },
+    {
+      "step": "click-spot:vent",
+      "ok": true,
+      "value": "vent @ 211,671"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 4,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "assert:__anJiao.scene() === 'container_interior'",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "assert:__anJiao.flags().includes('vent_opened')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "shot:shots/p1-06-interior.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\p1-06-interior.png"
+    },
+    {
+      "step": "click-spot:wall",
+      "ok": true,
+      "value": "wall @ 623,530"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 3,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "assert:__anJiao.items().includes('cut_mark')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "assert:__anJiao.flags().includes('cut_mark_found')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "hold-item:crowbar",
+      "ok": true,
+      "value": "crowbar @ 60,1170"
+    },
+    {
+      "step": "click-spot:crates",
+      "ok": true,
+      "value": "crates @ 360,728"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 4,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "assert:__anJiao.items().includes('altered_manifest')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "assert:__anJiao.flags().includes('crates_opened')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "assert:__anJiao.sfx().includes('document')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "shot:shots/p1-07-manifest.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\p1-07-manifest.png"
+    },
+    {
+      "step": "hold-item:crowbar",
+      "ok": true,
+      "value": "already held"
+    },
+    {
+      "step": "click-spot:cache",
+      "ok": true,
+      "value": "cache @ 614,688"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 5,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "assert:__anJiao.items().includes('bronze_emblem')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "assert:__anJiao.items().includes('ivory_sample')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "assert:__anJiao.flags().includes('cache_opened')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "shot:shots/p1-08-flashback.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\p1-08-flashback.png"
+    },
+    {
+      "step": "drop-item",
+      "ok": true,
+      "value": "held=null"
+    },
+    {
+      "step": "click-spot:back_out",
+      "ok": true,
+      "value": "back_out @ 115,133"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 1,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "assert:__anJiao.scene() === 'dock_exterior'",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "click-spot:zhou",
+      "ok": true,
+      "value": "zhou @ 646,890"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 5,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "assert:__anJiao.flags().includes('zhou_talked')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "shot:shots/p1-09-zhou.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\p1-09-zhou.png"
+    },
+    {
+      "step": "click-spot:zhou",
+      "ok": true,
+      "value": "zhou @ 646,890"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 8,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "assert:__anJiao.scene() === 'captain_cabin'",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "shot:shots/p1-10-chapter-card.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\p1-10-chapter-card.png"
+    },
+    {
+      "step": "eval:JSON.stringify({ items: __anJiao.items(), keys: __anJiao.keyCount(), clues: __anJiao.clueCount(), flags: __anJiao.flags() })",
+      "ok": true,
+      "value": "{\"items\":[\"bronze_emblem\",\"cut_mark\",\"mint_cigarette\",\"altered_manifest\",\"crowbar\",\"customs_seal\",\"ivory_sample\"],\"keys\":1,\"clues\":3,\"flags\":[\"vent_opened\",\"cut_mark_found\",\"crates_opened\",\"cache_opened\",\"zhou_talked\"]}"
+    },
+    {
+      "step": "assert:__anJiao.keyCount() === 1",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "assert:__anJiao.clueCount() === 3",
+      "ok": true,
+      "value": true
+    }
+  ],
+  "exceptions": [],
+  "consoleErrors": [],
+  "consoleAll": [
+    {
+      "level": "log",
+      "text": "%cPhaser v4.2.1 (WebGL | Web Audio)%c https://phaser.io/v4021 color: #ffffff; background-image: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAOCAYAAAAmL5yKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAARBJREFUeNpi/P//P0OHsPB/BiCoePuWkYFEwALSXJElzMBgLwE2CNkQxgWr/yMr/p8QimlBu5DQ//+8vBBco/ofzAe6imH+qv/53/6jYJAYSA4ZoxoANYTPKhiuCQZwGcJU+e4dqpMmvsDq14krV2MPAxDha2CMKvoXoiE/PBQUDgQD8j82UFae9B9bOIC8B9UD9gIjjIMN7Ns6lWHn4XMoYu62RgxO3tkMjIyMII2MYAOAtmFVhA+ADHf2ycGMRhANjUq8YO+WKWCvgAORIV8CkpDCrzIwsLIymC1qAtuAD4Bsh3sBmqAY3qcGwL2AC4DCpKtzHlgzOLWihwEuzTCN0GhDJHeYC4gByBphACDAAH2dDIxdjr+VAAAAAElFTkSuQmCC\"), linear-gradient(to bottom, #000814, #001d3d, #003566); background-repeat: no-repeat; background-position: 4px center, 0 0; padding: 2px 6px 2px 24px; background: transparent"
+    },
+    {
+      "level": "log",
+      "text": "[dev] window.__anJiao 已挂载"
+    }
+  ],
+  "failedRequests": [],
+  "ok": true
+}

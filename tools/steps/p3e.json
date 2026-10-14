@@ -1,0 +1,11 @@
+[
+  "eval:__anJiao.restart()",
+  "eval:__anJiao.give('crowbar','hold_key')",
+  "eval:__anJiao.goto('warehouse_night')",
+  "wait:800",
+  "settle",
+  "shot:shots/p3e-01-empty-hands.png",
+  "settle",
+  "shot:shots/p3e-02-ending.png",
+  "eval:__anJiao.ending()"
+]

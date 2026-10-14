@@ -1,0 +1,545 @@
+{
+  "url": "http://localhost:5199/?dev=1",
+  "input": "mouse",
+  "steps": [
+    {
+      "step": "wait:2600",
+      "ok": true
+    },
+    {
+      "step": "shot:shots/audit/00-prologue.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\audit\\00-prologue.png"
+    },
+    {
+      "step": "tap-center",
+      "ok": true,
+      "value": "center @ 360,640"
+    },
+    {
+      "step": "wait:1500",
+      "ok": true
+    },
+    {
+      "step": "shot:shots/audit/01-title.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\audit\\01-title.png"
+    },
+    {
+      "step": "click-title:开始调查",
+      "ok": true,
+      "value": "开始调查 @ 360,884"
+    },
+    {
+      "step": "wait:1500",
+      "ok": true
+    },
+    {
+      "step": "shot:shots/audit/02-ch1-dock-opening-text.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\audit\\02-ch1-dock-opening-text.png"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 2,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false
+      }
+    },
+    {
+      "step": "shot:shots/audit/03-ch1-dock.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\audit\\03-ch1-dock.png"
+    },
+    {
+      "step": "eval:__anJiao.give('crowbar','customs_seal','mint_cigarette')",
+      "ok": true,
+      "value": [
+        "crowbar",
+        "customs_seal",
+        "mint_cigarette"
+      ]
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 0,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false
+      }
+    },
+    {
+      "step": "shot:shots/audit/04-ch1-dock-inventory.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\audit\\04-ch1-dock-inventory.png"
+    },
+    {
+      "step": "hold-item:crowbar",
+      "ok": true,
+      "value": "crowbar @ 60,1170"
+    },
+    {
+      "step": "click-spot:vent",
+      "ok": true,
+      "value": "vent @ 211,671"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 3,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false
+      }
+    },
+    {
+      "step": "eval:__anJiao.give('bronze_emblem','ivory_sample','cut_mark','altered_manifest')",
+      "ok": true,
+      "value": [
+        "bronze_emblem",
+        "ivory_sample",
+        "cut_mark",
+        "altered_manifest"
+      ]
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 0,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false
+      }
+    },
+    {
+      "step": "shot:shots/audit/05-ch1-interior.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\audit\\05-ch1-interior.png"
+    },
+    {
+      "step": "hold-item:crowbar",
+      "ok": true,
+      "value": "crowbar @ 60,1165"
+    },
+    {
+      "step": "click-spot:crates",
+      "ok": true,
+      "value": "crates @ 360,728"
+    },
+    {
+      "step": "wait:900",
+      "ok": true
+    },
+    {
+      "step": "shot:shots/audit/06-document-overlay.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\audit\\06-document-overlay.png"
+    },
+    {
+      "step": "tap-center",
+      "ok": true,
+      "value": "center @ 360,640"
+    },
+    {
+      "step": "wait:600",
+      "ok": true
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 1,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false
+      }
+    },
+    {
+      "step": "eval:__anJiao.goto('captain_cabin')",
+      "ok": true,
+      "value": "captain_cabin"
+    },
+    {
+      "step": "wait:1200",
+      "ok": true
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 2,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false
+      }
+    },
+    {
+      "step": "shot:shots/audit/07-ch2-cabin.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\audit\\07-ch2-cabin.png"
+    },
+    {
+      "step": "click-spot:safe",
+      "ok": true,
+      "value": "safe @ 128,815"
+    },
+    {
+      "step": "wait:900",
+      "ok": true
+    },
+    {
+      "step": "shot:shots/audit/08-password-pad.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\audit\\08-password-pad.png"
+    },
+    {
+      "step": "pad:×",
+      "ok": true,
+      "value": "×"
+    },
+    {
+      "step": "wait:600",
+      "ok": true
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 0,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false
+      }
+    },
+    {
+      "step": "eval:__anJiao.goto('corridor')",
+      "ok": true,
+      "value": "corridor"
+    },
+    {
+      "step": "wait:1000",
+      "ok": true
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 1,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false
+      }
+    },
+    {
+      "step": "shot:shots/audit/09-ch2-corridor.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\audit\\09-ch2-corridor.png"
+    },
+    {
+      "step": "eval:__anJiao.goto('bilge')",
+      "ok": true,
+      "value": "bilge"
+    },
+    {
+      "step": "wait:1000",
+      "ok": true
+    },
+    {
+      "step": "shot:shots/audit/10-ch2-bilge-text.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\audit\\10-ch2-bilge-text.png"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 3,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false
+      }
+    },
+    {
+      "step": "shot:shots/audit/11-ch2-bilge.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\audit\\11-ch2-bilge.png"
+    },
+    {
+      "step": "eval:__anJiao.give('badge_half','ship_log','list_fragment','hold_key')",
+      "ok": true,
+      "value": [
+        "badge_half",
+        "ship_log",
+        "list_fragment",
+        "hold_key"
+      ]
+    },
+    {
+      "step": "eval:__anJiao.goto('warehouse_approach')",
+      "ok": true,
+      "value": "warehouse_approach"
+    },
+    {
+      "step": "wait:1200",
+      "ok": true
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 2,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false
+      }
+    },
+    {
+      "step": "shot:shots/audit/12-ch3-approach.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\audit\\12-ch3-approach.png"
+    },
+    {
+      "step": "eval:__anJiao.goto('warehouse_night')",
+      "ok": true,
+      "value": "warehouse_night"
+    },
+    {
+      "step": "wait:1400",
+      "ok": true
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 3,
+      "value": {
+        "scene": "confront",
+        "round": "chen",
+        "waiting": true,
+        "textBox": false,
+        "fumbleCount": 0
+      }
+    },
+    {
+      "step": "shot:shots/audit/13-confront-round1.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\audit\\13-confront-round1.png"
+    },
+    {
+      "step": "hold-item:bronze_emblem",
+      "ok": true,
+      "value": "bronze_emblem @ 420,1165"
+    },
+    {
+      "step": "click-confront:chen",
+      "ok": true,
+      "value": "chen @ 110,609"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 6,
+      "value": {
+        "scene": "confront",
+        "round": "crate",
+        "waiting": true,
+        "textBox": false,
+        "fumbleCount": 0
+      }
+    },
+    {
+      "step": "shot:shots/audit/14-confront-round2.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\audit\\14-confront-round2.png"
+    },
+    {
+      "step": "eval:(()=>{const s=__anJiao.state;s.reset();['bronze_emblem','badge_half','cut_mark','mint_cigarette','altered_manifest','ship_log','list_fragment'].forEach(i=>s.addItem(i));return s.resolve().final})()",
+      "ok": true,
+      "value": "tide_ebb"
+    },
+    {
+      "step": "screen:Ending",
+      "ok": true,
+      "value": "Ending"
+    },
+    {
+      "step": "wait:900",
+      "ok": true
+    },
+    {
+      "step": "shot:shots/audit/20-ending-tide-ebb.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\audit\\20-ending-tide-ebb.png"
+    },
+    {
+      "step": "eval:(()=>{const s=__anJiao.state;s.reset();['bronze_emblem','badge_half','cut_mark','altered_manifest','ship_log'].forEach(i=>s.addItem(i));return s.resolve().final})()",
+      "ok": true,
+      "value": "torn_page"
+    },
+    {
+      "step": "screen:Ending",
+      "ok": true,
+      "value": "Ending"
+    },
+    {
+      "step": "wait:900",
+      "ok": true
+    },
+    {
+      "step": "shot:shots/audit/21-ending-torn-page.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\audit\\21-ending-torn-page.png"
+    },
+    {
+      "step": "eval:(()=>{const s=__anJiao.state;s.reset();['badge_half','cut_mark','mint_cigarette','ship_log'].forEach(i=>s.addItem(i));return s.resolve().final})()",
+      "ok": true,
+      "value": "lost_emblem"
+    },
+    {
+      "step": "screen:Ending",
+      "ok": true,
+      "value": "Ending"
+    },
+    {
+      "step": "wait:900",
+      "ok": true
+    },
+    {
+      "step": "shot:shots/audit/22-ending-lost-emblem.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\audit\\22-ending-lost-emblem.png"
+    },
+    {
+      "step": "eval:(()=>{const s=__anJiao.state;s.reset();['bronze_emblem','cut_mark','mint_cigarette','ship_log'].forEach(i=>s.addItem(i));return s.resolve().final})()",
+      "ok": true,
+      "value": "broken_number"
+    },
+    {
+      "step": "screen:Ending",
+      "ok": true,
+      "value": "Ending"
+    },
+    {
+      "step": "wait:900",
+      "ok": true
+    },
+    {
+      "step": "shot:shots/audit/23-ending-broken-number.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\audit\\23-ending-broken-number.png"
+    },
+    {
+      "step": "eval:(()=>{const s=__anJiao.state;s.reset();['cut_mark','mint_cigarette','ship_log'].forEach(i=>s.addItem(i));return s.resolve().final})()",
+      "ok": true,
+      "value": "hollow_win"
+    },
+    {
+      "step": "screen:Ending",
+      "ok": true,
+      "value": "Ending"
+    },
+    {
+      "step": "wait:900",
+      "ok": true
+    },
+    {
+      "step": "shot:shots/audit/24-ending-hollow-win.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\audit\\24-ending-hollow-win.png"
+    },
+    {
+      "step": "eval:(()=>{const s=__anJiao.state;s.reset();['bronze_emblem','badge_half','cut_mark','mint_cigarette','altered_manifest','ship_log','list_fragment'].forEach(i=>s.addItem(i));s.present('mint_cigarette');s.present('bronze_emblem');s.present('mint_cigarette');s.present('ship_log');s.present('mint_cigarette');return [s.resolve().final,s.fumbleCount].join('/')})()",
+      "ok": true,
+      "value": "tipped_off/3"
+    },
+    {
+      "step": "screen:Ending",
+      "ok": true,
+      "value": "Ending"
+    },
+    {
+      "step": "wait:900",
+      "ok": true
+    },
+    {
+      "step": "shot:shots/audit/25-ending-tipped-off.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\audit\\25-ending-tipped-off.png"
+    },
+    {
+      "step": "eval:__anJiao.wipeSave()",
+      "ok": true,
+      "value": "save cleared"
+    },
+    {
+      "step": "screen:Gallery",
+      "ok": true,
+      "value": "Gallery"
+    },
+    {
+      "step": "wait:800",
+      "ok": true
+    },
+    {
+      "step": "shot:shots/audit/30-gallery-locked.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\audit\\30-gallery-locked.png"
+    },
+    {
+      "step": "eval:__anJiao.unlock('tide_ebb','torn_page','lost_emblem','broken_number','hollow_win','tipped_off')",
+      "ok": true,
+      "value": [
+        "tide_ebb",
+        "torn_page",
+        "lost_emblem",
+        "broken_number",
+        "hollow_win",
+        "tipped_off"
+      ]
+    },
+    {
+      "step": "screen:Gallery",
+      "ok": true,
+      "value": "Gallery"
+    },
+    {
+      "step": "wait:800",
+      "ok": true
+    },
+    {
+      "step": "shot:shots/audit/31-gallery-full.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\audit\\31-gallery-full.png"
+    }
+  ],
+  "exceptions": [],
+  "consoleErrors": [],
+  "consoleAll": [
+    {
+      "level": "log",
+      "text": "%cPhaser v4.2.1 (WebGL | Web Audio)%c https://phaser.io/v4021 color: #ffffff; background-image: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAOCAYAAAAmL5yKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAARBJREFUeNpi/P//P0OHsPB/BiCoePuWkYFEwALSXJElzMBgLwE2CNkQxgWr/yMr/p8QimlBu5DQ//+8vBBco/ofzAe6imH+qv/53/6jYJAYSA4ZoxoANYTPKhiuCQZwGcJU+e4dqpMmvsDq14krV2MPAxDha2CMKvoXoiE/PBQUDgQD8j82UFae9B9bOIC8B9UD9gIjjIMN7Ns6lWHn4XMoYu62RgxO3tkMjIyMII2MYAOAtmFVhA+ADHf2ycGMRhANjUq8YO+WKWCvgAORIV8CkpDCrzIwsLIymC1qAtuAD4Bsh3sBmqAY3qcGwL2AC4DCpKtzHlgzOLWihwEuzTCN0GhDJHeYC4gByBphACDAAH2dDIxdjr+VAAAAAElFTkSuQmCC\"), linear-gradient(to bottom, #000814, #001d3d, #003566); background-repeat: no-repeat; background-position: 4px center, 0 0; padding: 2px 6px 2px 24px; background: transparent"
+    },
+    {
+      "level": "log",
+      "text": "[dev] window.__anJiao 已挂载"
+    }
+  ],
+  "failedRequests": [],
+  "ok": true
+}

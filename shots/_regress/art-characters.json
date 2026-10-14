@@ -1,0 +1,188 @@
+{
+  "url": "http://localhost:5199/?dev=1&t=1791999210299720",
+  "input": "mouse",
+  "steps": [
+    {
+      "step": "eval:__anJiao.restart()",
+      "ok": true,
+      "value": "dock_exterior"
+    },
+    {
+      "step": "eval:__anJiao.goto('dock_exterior')",
+      "ok": true,
+      "value": "dock_exterior"
+    },
+    {
+      "step": "wait:900",
+      "ok": true
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 0,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "shot:shots/chars/01-dock.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\chars\\01-dock.png"
+    },
+    {
+      "step": "eval:__anJiao.give('bronze_emblem','badge_half','cut_mark','mint_cigarette','altered_manifest','ship_log','list_fragment')",
+      "ok": true,
+      "value": [
+        "bronze_emblem",
+        "badge_half",
+        "cut_mark",
+        "mint_cigarette",
+        "altered_manifest",
+        "ship_log",
+        "list_fragment"
+      ]
+    },
+    {
+      "step": "eval:__anJiao.goto('warehouse_approach')",
+      "ok": true,
+      "value": "warehouse_approach"
+    },
+    {
+      "step": "wait:600",
+      "ok": true
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 2,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "click-spot:radio",
+      "ok": true,
+      "value": "radio @ 360,1000"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 2,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "click-spot:door",
+      "ok": true,
+      "value": "door @ 400,503"
+    },
+    {
+      "step": "wait:700",
+      "ok": true
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 4,
+      "value": {
+        "scene": "confront",
+        "round": "chen",
+        "waiting": true,
+        "textBox": false,
+        "fumbleCount": 0
+      }
+    },
+    {
+      "step": "shot:shots/chars/02-confront-r1.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\chars\\02-confront-r1.png"
+    },
+    {
+      "step": "hold-item:cut_mark",
+      "ok": true,
+      "value": "cut_mark @ 300,1165"
+    },
+    {
+      "step": "click-confront:crate",
+      "ok": true,
+      "value": "crate @ 348,688"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 0,
+      "value": {
+        "scene": "confront",
+        "round": "chen",
+        "waiting": true,
+        "textBox": false,
+        "fumbleCount": 0
+      }
+    },
+    {
+      "step": "shot:shots/chars/03-confront-r2.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\chars\\03-confront-r2.png"
+    },
+    {
+      "step": "eval:__anJiao.confront()",
+      "ok": true,
+      "value": {
+        "round": "chen",
+        "waiting": true,
+        "textBox": false,
+        "evidence": false,
+        "doc": false,
+        "fumbleCount": 0,
+        "targets": {
+          "chen": {
+            "x": 110,
+            "y": 609
+          },
+          "crate": {
+            "x": 348,
+            "y": 688
+          },
+          "chief": {
+            "x": 601,
+            "y": 539
+          }
+        },
+        "neutral": {
+          "x": 360,
+          "y": 1000
+        }
+      }
+    }
+  ],
+  "exceptions": [],
+  "consoleErrors": [],
+  "consoleAll": [
+    {
+      "level": "log",
+      "text": "%cPhaser v4.2.1 (WebGL | Web Audio)%c https://phaser.io/v4021 color: #ffffff; background-image: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAOCAYAAAAmL5yKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAARBJREFUeNpi/P//P0OHsPB/BiCoePuWkYFEwALSXJElzMBgLwE2CNkQxgWr/yMr/p8QimlBu5DQ//+8vBBco/ofzAe6imH+qv/53/6jYJAYSA4ZoxoANYTPKhiuCQZwGcJU+e4dqpMmvsDq14krV2MPAxDha2CMKvoXoiE/PBQUDgQD8j82UFae9B9bOIC8B9UD9gIjjIMN7Ns6lWHn4XMoYu62RgxO3tkMjIyMII2MYAOAtmFVhA+ADHf2ycGMRhANjUq8YO+WKWCvgAORIV8CkpDCrzIwsLIymC1qAtuAD4Bsh3sBmqAY3qcGwL2AC4DCpKtzHlgzOLWihwEuzTCN0GhDJHeYC4gByBphACDAAH2dDIxdjr+VAAAAAElFTkSuQmCC\"), linear-gradient(to bottom, #000814, #001d3d, #003566); background-repeat: no-repeat; background-position: 4px center, 0 0; padding: 2px 6px 2px 24px; background: transparent"
+    },
+    {
+      "level": "log",
+      "text": "[dev] window.__anJiao 已挂载"
+    }
+  ],
+  "failedRequests": [],
+  "ok": true
+}

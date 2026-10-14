@@ -1,0 +1,23 @@
+{
+  "name": "an-jiao",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "《暗礁》— 锈湖式点击解谜 · 反走私题材 · 移动端 H5",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "phaser": "^4.2.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.4"
+  }
+}

@@ -1,0 +1,251 @@
+{
+  "url": "http://localhost:5199/?dev=1&t=1791999198287106",
+  "input": "mouse",
+  "steps": [
+    {
+      "step": "wait:2200",
+      "ok": true
+    },
+    {
+      "step": "eval:__anJiao.goto('dock_exterior')",
+      "ok": true,
+      "value": "dock_exterior"
+    },
+    {
+      "step": "wait:900",
+      "ok": true
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 2,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "shot:shots/c/00-dock.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\c\\00-dock.png"
+    },
+    {
+      "step": "eval:__anJiao.clearSfx()",
+      "ok": true,
+      "value": "cleared"
+    },
+    {
+      "step": "eval:(()=>{window.__r0=__anJiao.ripples();return window.__r0})()",
+      "ok": true,
+      "value": 0
+    },
+    {
+      "step": "click-spot:puddle",
+      "ok": true,
+      "value": "puddle @ 166,945"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 2,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "expect:__anJiao.ripples() === window.__r0 + 1",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "assert:__anJiao.items().includes('crowbar')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "assert:__anJiao.sfx().includes('hotspot')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "eval:__anJiao.give('customs_seal','mint_cigarette','altered_manifest','ship_log','list_fragment','badge_half')",
+      "ok": true,
+      "value": [
+        "customs_seal",
+        "mint_cigarette",
+        "altered_manifest",
+        "ship_log",
+        "list_fragment",
+        "badge_half"
+      ]
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 0,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "shot:shots/c/01-bar-icons.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\c\\01-bar-icons.png"
+    },
+    {
+      "step": "eval:__anJiao.clearSfx()",
+      "ok": true,
+      "value": "cleared"
+    },
+    {
+      "step": "evidence",
+      "ok": true,
+      "value": "7 行 @ 100,1120"
+    },
+    {
+      "step": "shot:shots/c/02-evidence-open.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\c\\02-evidence-open.png"
+    },
+    {
+      "step": "expect:Object.keys(__anJiao.evidenceRows().rows).length === 7",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "expect:__anJiao.evidenceRows().rows.altered_manifest !== undefined",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "expect:['altered_manifest','ship_log','list_fragment','badge_half'].every(function(id){return !!__anJiao.evidenceRows().rows[id]})",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "expect:__anJiao.evidenceRows().rows.crowbar !== undefined",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "reread:altered_manifest",
+      "ok": true,
+      "value": "altered_manifest 原件已打开"
+    },
+    {
+      "step": "shot:shots/c/03-reread-manifest.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\c\\03-reread-manifest.png"
+    },
+    {
+      "step": "assert:__anJiao.sfx().includes('document')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 1,
+      "value": {
+        "busy": false,
+        "textBox": false,
+        "card": false,
+        "doc": false,
+        "evidence": false,
+        "backArmed": false
+      }
+    },
+    {
+      "step": "expect:__anJiao.idle().doc === false",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "evidence",
+      "ok": true,
+      "value": "7 行 @ 100,1120"
+    },
+    {
+      "step": "shot:shots/c/04-evidence-again.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\c\\04-evidence-again.png"
+    },
+    {
+      "step": "evidence-close",
+      "ok": true,
+      "value": "closed"
+    },
+    {
+      "step": "expect:__anJiao.evidenceRows() === null",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "back",
+      "ok": true,
+      "value": "armed @ 680,38"
+    },
+    {
+      "step": "shot:shots/c/05-back-armed.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\c\\05-back-armed.png"
+    },
+    {
+      "step": "expect:__anJiao.back().armed === true",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "back-confirm",
+      "ok": true,
+      "value": "back to Title"
+    },
+    {
+      "step": "shot:shots/c/06-title.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\c\\06-title.png"
+    },
+    {
+      "step": "expect:__anJiao.active().includes('Title')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "expect:getComputedStyle(document.getElementById('rotate-hint')).display === 'none'",
+      "ok": true,
+      "value": true
+    }
+  ],
+  "exceptions": [],
+  "consoleErrors": [],
+  "consoleAll": [
+    {
+      "level": "log",
+      "text": "%cPhaser v4.2.1 (WebGL | Web Audio)%c https://phaser.io/v4021 color: #ffffff; background-image: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAOCAYAAAAmL5yKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAARBJREFUeNpi/P//P0OHsPB/BiCoePuWkYFEwALSXJElzMBgLwE2CNkQxgWr/yMr/p8QimlBu5DQ//+8vBBco/ofzAe6imH+qv/53/6jYJAYSA4ZoxoANYTPKhiuCQZwGcJU+e4dqpMmvsDq14krV2MPAxDha2CMKvoXoiE/PBQUDgQD8j82UFae9B9bOIC8B9UD9gIjjIMN7Ns6lWHn4XMoYu62RgxO3tkMjIyMII2MYAOAtmFVhA+ADHf2ycGMRhANjUq8YO+WKWCvgAORIV8CkpDCrzIwsLIymC1qAtuAD4Bsh3sBmqAY3qcGwL2AC4DCpKtzHlgzOLWihwEuzTCN0GhDJHeYC4gByBphACDAAH2dDIxdjr+VAAAAAElFTkSuQmCC\"), linear-gradient(to bottom, #000814, #001d3d, #003566); background-repeat: no-repeat; background-position: 4px center, 0 0; padding: 2px 6px 2px 24px; background: transparent"
+    },
+    {
+      "level": "log",
+      "text": "[dev] window.__anJiao 已挂载"
+    }
+  ],
+  "failedRequests": [],
+  "ok": true
+}

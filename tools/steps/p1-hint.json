@@ -1,0 +1,33 @@
+[
+  "wait:2200",
+  "eval:__anJiao.restart()",
+  "wait:900",
+  "settle",
+  "eval:__anJiao.clearSfx()",
+  "shot:shots/p1h-00-start.png",
+
+  "click-spot:zhou",
+  "settle",
+  "assert:__anJiao.flags().includes('zhou_talked')",
+  "assert:__anJiao.scene() === 'dock_exterior'",
+  "shot:shots/p1h-01-zhou-lines.png",
+
+  "click-spot:zhou",
+  "wait:600",
+  "assert:__anJiao.sfx().includes('searchAgain')",
+  "assert:__anJiao.scene() === 'dock_exterior'",
+  "shot:shots/p1h-02-search-again.png",
+
+  "wait:4200",
+  "shot:shots/p1h-03-hint-gone.png",
+  "assert:__anJiao.scene() === 'dock_exterior'",
+
+  "click-spot:zhou",
+  "settle",
+  "assert:__anJiao.scene() === 'captain_cabin'",
+  "shot:shots/p1h-04-advanced.png",
+
+  "eval:JSON.stringify({ items: __anJiao.items(), keys: __anJiao.keyCount(), clues: __anJiao.clueCount() })",
+  "assert:__anJiao.keyCount() === 0",
+  "assert:__anJiao.clueCount() === 0"
+]

@@ -1,0 +1,313 @@
+{
+  "url": "http://localhost:5199/?dev=1&t=1791999068258246",
+  "input": "mouse",
+  "steps": [
+    {
+      "step": "eval:__anJiao.wipeSave()",
+      "ok": true,
+      "value": "save cleared"
+    },
+    {
+      "step": "assert:__anJiao.unlocked().length === 0",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "eval:__anJiao.restart()",
+      "ok": true,
+      "value": "dock_exterior"
+    },
+    {
+      "step": "eval:__anJiao.give('bronze_emblem','badge_half','cut_mark','mint_cigarette','altered_manifest','ship_log','list_fragment')",
+      "ok": true,
+      "value": [
+        "bronze_emblem",
+        "badge_half",
+        "cut_mark",
+        "mint_cigarette",
+        "altered_manifest",
+        "ship_log",
+        "list_fragment"
+      ]
+    },
+    {
+      "step": "eval:__anJiao.goto('warehouse_night')",
+      "ok": true,
+      "value": "warehouse_night"
+    },
+    {
+      "step": "wait:800",
+      "ok": true
+    },
+    {
+      "step": "eval:__anJiao.clearSfx()",
+      "ok": true,
+      "value": "cleared"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 4,
+      "value": {
+        "scene": "confront",
+        "round": "chen",
+        "waiting": true,
+        "textBox": false,
+        "fumbleCount": 0
+      }
+    },
+    {
+      "step": "hold-item:bronze_emblem",
+      "ok": true,
+      "value": "bronze_emblem @ 60,1165"
+    },
+    {
+      "step": "click-confront:chen",
+      "ok": true,
+      "value": "chen @ 110,609"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 6,
+      "value": {
+        "scene": "confront",
+        "round": "crate",
+        "waiting": true,
+        "textBox": false,
+        "fumbleCount": 0
+      }
+    },
+    {
+      "step": "hold-item:altered_manifest",
+      "ok": true,
+      "value": "altered_manifest @ 540,1165"
+    },
+    {
+      "step": "click-confront:crate",
+      "ok": true,
+      "value": "crate @ 348,688"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 11,
+      "value": {
+        "scene": "confront",
+        "round": "chief",
+        "waiting": true,
+        "textBox": false,
+        "fumbleCount": 0
+      }
+    },
+    {
+      "step": "hold-item:badge_half",
+      "ok": true,
+      "value": "badge_half @ 180,1165"
+    },
+    {
+      "step": "click-confront:chief",
+      "ok": true,
+      "value": "chief @ 601,539"
+    },
+    {
+      "step": "settle",
+      "ok": true,
+      "clicks": 10,
+      "value": {
+        "scene": "ending",
+        "id": "tide_ebb",
+        "name": "潮落",
+        "base": "tide_ebb",
+        "downgraded": false,
+        "forcedWorst": false,
+        "keyCount": 2,
+        "clueCount": 5,
+        "fumbleCount": 0,
+        "plate": true
+      }
+    },
+    {
+      "step": "assert:__anJiao.ending() && __anJiao.ending().id === 'tide_ebb'",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "assert:__anJiao.unlocked().includes('tide_ebb')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "eval:__anJiao.sfx()",
+      "ok": true,
+      "value": [
+        "confront",
+        "confront",
+        "confront",
+        "ending"
+      ]
+    },
+    {
+      "step": "assert:__anJiao.sfx().filter((c) => c === 'confront').length === 3",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "assert:__anJiao.sfx().includes('ending')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "screen:Gallery",
+      "ok": true,
+      "value": "Gallery"
+    },
+    {
+      "step": "wait:400",
+      "ok": true
+    },
+    {
+      "step": "shot:shots/p4-01-gallery.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\p4-01-gallery.png"
+    },
+    {
+      "step": "eval:__anJiao.gallery()",
+      "ok": true,
+      "value": {
+        "unlocked": [
+          "tide_ebb"
+        ],
+        "total": 6
+      }
+    },
+    {
+      "step": "assert:__anJiao.gallery().total === 6",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "assert:__anJiao.gallery().unlocked.length === 1",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "eval:setTimeout(() => location.reload(), 50)",
+      "ok": true,
+      "value": 1
+    },
+    {
+      "step": "wait:3500",
+      "ok": true
+    },
+    {
+      "step": "eval:__anJiao.unlocked()",
+      "ok": true,
+      "value": [
+        "tide_ebb"
+      ]
+    },
+    {
+      "step": "assert:__anJiao.unlocked().includes('tide_ebb')",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "screen:Gallery",
+      "ok": true,
+      "value": "Gallery"
+    },
+    {
+      "step": "wait:400",
+      "ok": true
+    },
+    {
+      "step": "eval:__anJiao.gallery()",
+      "ok": true,
+      "value": {
+        "unlocked": [
+          "tide_ebb"
+        ],
+        "total": 6
+      }
+    },
+    {
+      "step": "assert:__anJiao.gallery().unlocked.length === 1",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "shot:shots/p4-02-gallery-after-reload.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\p4-02-gallery-after-reload.png"
+    },
+    {
+      "step": "eval:__anJiao.unlock('torn_page','lost_emblem','broken_number','hollow_win','tipped_off')",
+      "ok": true,
+      "value": [
+        "tide_ebb",
+        "torn_page",
+        "lost_emblem",
+        "broken_number",
+        "hollow_win",
+        "tipped_off"
+      ]
+    },
+    {
+      "step": "screen:Gallery",
+      "ok": true,
+      "value": "Gallery"
+    },
+    {
+      "step": "wait:400",
+      "ok": true
+    },
+    {
+      "step": "eval:__anJiao.gallery()",
+      "ok": true,
+      "value": {
+        "unlocked": [
+          "tide_ebb",
+          "torn_page",
+          "lost_emblem",
+          "broken_number",
+          "hollow_win",
+          "tipped_off"
+        ],
+        "total": 6
+      }
+    },
+    {
+      "step": "assert:__anJiao.gallery().unlocked.length === 6",
+      "ok": true,
+      "value": true
+    },
+    {
+      "step": "shot:shots/p4-03-gallery-full.png",
+      "ok": true,
+      "path": "D:\\example\\an-jiao\\shots\\p4-03-gallery-full.png"
+    }
+  ],
+  "exceptions": [],
+  "consoleErrors": [],
+  "consoleAll": [
+    {
+      "level": "log",
+      "text": "%cPhaser v4.2.1 (WebGL | Web Audio)%c https://phaser.io/v4021 color: #ffffff; background-image: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAOCAYAAAAmL5yKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAARBJREFUeNpi/P//P0OHsPB/BiCoePuWkYFEwALSXJElzMBgLwE2CNkQxgWr/yMr/p8QimlBu5DQ//+8vBBco/ofzAe6imH+qv/53/6jYJAYSA4ZoxoANYTPKhiuCQZwGcJU+e4dqpMmvsDq14krV2MPAxDha2CMKvoXoiE/PBQUDgQD8j82UFae9B9bOIC8B9UD9gIjjIMN7Ns6lWHn4XMoYu62RgxO3tkMjIyMII2MYAOAtmFVhA+ADHf2ycGMRhANjUq8YO+WKWCvgAORIV8CkpDCrzIwsLIymC1qAtuAD4Bsh3sBmqAY3qcGwL2AC4DCpKtzHlgzOLWihwEuzTCN0GhDJHeYC4gByBphACDAAH2dDIxdjr+VAAAAAElFTkSuQmCC\"), linear-gradient(to bottom, #000814, #001d3d, #003566); background-repeat: no-repeat; background-position: 4px center, 0 0; padding: 2px 6px 2px 24px; background: transparent"
+    },
+    {
+      "level": "log",
+      "text": "[dev] window.__anJiao 已挂载"
+    },
+    {
+      "level": "log",
+      "text": "%cPhaser v4.2.1 (WebGL | Web Audio)%c https://phaser.io/v4021 color: #ffffff; background-image: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAOCAYAAAAmL5yKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAARBJREFUeNpi/P//P0OHsPB/BiCoePuWkYFEwALSXJElzMBgLwE2CNkQxgWr/yMr/p8QimlBu5DQ//+8vBBco/ofzAe6imH+qv/53/6jYJAYSA4ZoxoANYTPKhiuCQZwGcJU+e4dqpMmvsDq14krV2MPAxDha2CMKvoXoiE/PBQUDgQD8j82UFae9B9bOIC8B9UD9gIjjIMN7Ns6lWHn4XMoYu62RgxO3tkMjIyMII2MYAOAtmFVhA+ADHf2ycGMRhANjUq8YO+WKWCvgAORIV8CkpDCrzIwsLIymC1qAtuAD4Bsh3sBmqAY3qcGwL2AC4DCpKtzHlgzOLWihwEuzTCN0GhDJHeYC4gByBphACDAAH2dDIxdjr+VAAAAAElFTkSuQmCC\"), linear-gradient(to bottom, #000814, #001d3d, #003566); background-repeat: no-repeat; background-position: 4px center, 0 0; padding: 2px 6px 2px 24px; background: transparent"
+    },
+    {
+      "level": "log",
+      "text": "[dev] window.__anJiao 已挂载"
+    }
+  ],
+  "failedRequests": [],
+  "ok": true
+}

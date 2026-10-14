@@ -1,0 +1,738 @@
+{
+  "url": "http://localhost:5199/?dev=1",
+  "steps": [
+    {
+      "step": "wait:2200",
+      "ok": true
+    },
+    {
+      "step": "eval:__anJiao.goto('dock_exterior')",
+      "ok": true,
+      "value": "dock_exterior"
+    },
+    {
+      "step": "wait:900",
+      "ok": true
+    },
+    {
+      "step": "shot:shots/p1-01-enter.png",
+      "ok": true,
+      "path": "D:\\example\\deepseek\\an-jiao\\shots\\p1-01-enter.png"
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "eval:'A 进入台词清完 items=' + JSON.stringify(__anJiao.names())",
+      "ok": true,
+      "value": "A 进入台词清完 items=[]"
+    },
+    {
+      "step": "click:166,945",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "eval:'B 积水 items=' + JSON.stringify(__anJiao.names())",
+      "ok": true,
+      "value": "B 积水 items=[\"撬棍\"]"
+    },
+    {
+      "step": "shot:shots/p1-03-crowbar.png",
+      "ok": true,
+      "path": "D:\\example\\deepseek\\an-jiao\\shots\\p1-03-crowbar.png"
+    },
+    {
+      "step": "click:437,414",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "eval:'C 封条 items=' + JSON.stringify(__anJiao.names())",
+      "ok": true,
+      "value": "C 封条 items=[\"撬棍\",\"海关封条\"]"
+    },
+    {
+      "step": "click:654,999",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "eval:'D 烟蒂 items=' + JSON.stringify(__anJiao.names())",
+      "ok": true,
+      "value": "D 烟蒂 items=[\"薄荷烟蒂\",\"撬棍\",\"海关封条\"]"
+    },
+    {
+      "step": "click:211,671",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "eval:'E 徒手通风口 flags=' + JSON.stringify(__anJiao.flags())",
+      "ok": true,
+      "value": "E 徒手通风口 flags=[]"
+    },
+    {
+      "step": "shot:shots/p1-04-bare-handed.png",
+      "ok": true,
+      "path": "D:\\example\\deepseek\\an-jiao\\shots\\p1-04-bare-handed.png"
+    },
+    {
+      "step": "hold-item:crowbar",
+      "ok": true,
+      "value": "crowbar @ 45,1174"
+    },
+    {
+      "step": "eval:'E2 held=' + __anJiao.held()",
+      "ok": true,
+      "value": "E2 held=crowbar"
+    },
+    {
+      "step": "click:211,671",
+      "ok": true
+    },
+    {
+      "step": "wait:800",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "eval:'F 进箱 flags=' + JSON.stringify(__anJiao.flags())",
+      "ok": true,
+      "value": "F 进箱 flags=[\"vent_opened\"]"
+    },
+    {
+      "step": "shot:shots/p1-06-interior.png",
+      "ok": true,
+      "path": "D:\\example\\deepseek\\an-jiao\\shots\\p1-06-interior.png"
+    },
+    {
+      "step": "hold-item:crowbar",
+      "ok": true,
+      "value": "crowbar @ 45,1174"
+    },
+    {
+      "step": "eval:'G0 held=' + __anJiao.held()",
+      "ok": true,
+      "value": "G0 held=crowbar"
+    },
+    {
+      "step": "click:360,728",
+      "ok": true
+    },
+    {
+      "step": "wait:900",
+      "ok": true
+    },
+    {
+      "step": "shot:shots/p1-07-manifest.png",
+      "ok": true,
+      "path": "D:\\example\\deepseek\\an-jiao\\shots\\p1-07-manifest.png"
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "eval:'G 木箱 items=' + JSON.stringify(__anJiao.names()) + ' held=' + __anJiao.held()",
+      "ok": true,
+      "value": "G 木箱 items=[\"薄荷烟蒂\",\"涂改提货单\",\"撬棍\",\"海关封条\"] held=null"
+    },
+    {
+      "step": "click:623,530",
+      "ok": true
+    },
+    {
+      "step": "wait:400",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "eval:'H 内壁 items=' + JSON.stringify(__anJiao.names()) + ' held=' + __anJiao.held()",
+      "ok": true,
+      "value": "H 内壁 items=[\"夹层切割痕迹\",\"薄荷烟蒂\",\"涂改提货单\",\"撬棍\",\"海关封条\"] held=null"
+    },
+    {
+      "step": "hold-item:crowbar",
+      "ok": true,
+      "value": "crowbar @ 45,1174"
+    },
+    {
+      "step": "eval:'H2 held=' + __anJiao.held()",
+      "ok": true,
+      "value": "H2 held=crowbar"
+    },
+    {
+      "step": "click:614,688",
+      "ok": true
+    },
+    {
+      "step": "wait:1500",
+      "ok": true
+    },
+    {
+      "step": "shot:shots/p1-08-flashback.png",
+      "ok": true,
+      "path": "D:\\example\\deepseek\\an-jiao\\shots\\p1-08-flashback.png"
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:400",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "eval:'I 暗格 items=' + JSON.stringify(__anJiao.names()) + ' keys=' + __anJiao.keyCount() + ' clues=' + __anJiao.clueCount()",
+      "ok": true,
+      "value": "I 暗格 items=[\"蛇形铜徽\",\"夹层切割痕迹\",\"薄荷烟蒂\",\"涂改提货单\",\"撬棍\",\"海关封条\",\"象牙样本\"] keys=1 clues=3"
+    },
+    {
+      "step": "shot:shots/p1-09-after-cache.png",
+      "ok": true,
+      "path": "D:\\example\\deepseek\\an-jiao\\shots\\p1-09-after-cache.png"
+    },
+    {
+      "step": "click:115,133",
+      "ok": true
+    },
+    {
+      "step": "wait:800",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "eval:'J 回码头 items=' + JSON.stringify(__anJiao.names())",
+      "ok": true,
+      "value": "J 回码头 items=[\"蛇形铜徽\",\"夹层切割痕迹\",\"薄荷烟蒂\",\"涂改提货单\",\"撬棍\",\"海关封条\",\"象牙样本\"]"
+    },
+    {
+      "step": "shot:shots/p1-10-back-outside.png",
+      "ok": true,
+      "path": "D:\\example\\deepseek\\an-jiao\\shots\\p1-10-back-outside.png"
+    },
+    {
+      "step": "click:646,890",
+      "ok": true
+    },
+    {
+      "step": "wait:1200",
+      "ok": true
+    },
+    {
+      "step": "shot:shots/p1-11-zhou.png",
+      "ok": true,
+      "path": "D:\\example\\deepseek\\an-jiao\\shots\\p1-11-zhou.png"
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:400",
+      "ok": true
+    },
+    {
+      "step": "eval:'K 老周对白清完 flags=' + JSON.stringify(__anJiao.flags())",
+      "ok": true,
+      "value": "K 老周对白清完 flags=[\"vent_opened\",\"crates_opened\",\"cut_mark_found\",\"cache_opened\",\"zhou_talked\"]"
+    },
+    {
+      "step": "click:646,890",
+      "ok": true
+    },
+    {
+      "step": "wait:900",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:400",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:400",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:400",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:400",
+      "ok": true
+    },
+    {
+      "step": "eval:'L 推进后 active=' + JSON.stringify(__anJiao.active())",
+      "ok": true,
+      "value": "L 推进后 active=[\"Explore\"]"
+    },
+    {
+      "step": "shot:shots/p1-12-chapter-card.png",
+      "ok": true,
+      "path": "D:\\example\\deepseek\\an-jiao\\shots\\p1-12-chapter-card.png"
+    },
+    {
+      "step": "wait:3000",
+      "ok": true
+    },
+    {
+      "step": "shot:shots/p1-13-after-card.png",
+      "ok": true,
+      "path": "D:\\example\\deepseek\\an-jiao\\shots\\p1-13-after-card.png"
+    },
+    {
+      "step": "eval:'END items=' + JSON.stringify(__anJiao.names()) + ' keys=' + __anJiao.keyCount() + ' clues=' + __anJiao.clueCount() + ' flags=' + JSON.stringify(__anJiao.flags())",
+      "ok": true,
+      "value": "END items=[\"蛇形铜徽\",\"夹层切割痕迹\",\"薄荷烟蒂\",\"涂改提货单\",\"撬棍\",\"海关封条\",\"象牙样本\"] keys=1 clues=3 flags=[\"vent_opened\",\"crates_opened\",\"cut_mark_found\",\"cache_opened\",\"zhou_talked\"]"
+    }
+  ],
+  "exceptions": [],
+  "consoleErrors": [],
+  "consoleAll": [
+    {
+      "level": "log",
+      "text": "%cPhaser v4.2.1 (WebGL | Web Audio)%c https://phaser.io/v4021 color: #ffffff; background-image: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAOCAYAAAAmL5yKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAARBJREFUeNpi/P//P0OHsPB/BiCoePuWkYFEwALSXJElzMBgLwE2CNkQxgWr/yMr/p8QimlBu5DQ//+8vBBco/ofzAe6imH+qv/53/6jYJAYSA4ZoxoANYTPKhiuCQZwGcJU+e4dqpMmvsDq14krV2MPAxDha2CMKvoXoiE/PBQUDgQD8j82UFae9B9bOIC8B9UD9gIjjIMN7Ns6lWHn4XMoYu62RgxO3tkMjIyMII2MYAOAtmFVhA+ADHf2ycGMRhANjUq8YO+WKWCvgAORIV8CkpDCrzIwsLIymC1qAtuAD4Bsh3sBmqAY3qcGwL2AC4DCpKtzHlgzOLWihwEuzTCN0GhDJHeYC4gByBphACDAAH2dDIxdjr+VAAAAAElFTkSuQmCC\"), linear-gradient(to bottom, #000814, #001d3d, #003566); background-repeat: no-repeat; background-position: 4px center, 0 0; padding: 2px 6px 2px 24px; background: transparent"
+    },
+    {
+      "level": "log",
+      "text": "[dev] window.__anJiao 已挂载"
+    }
+  ],
+  "failedRequests": [],
+  "ok": true
+}

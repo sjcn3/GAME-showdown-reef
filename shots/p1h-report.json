@@ -1,0 +1,239 @@
+{
+  "url": "http://localhost:5199/?dev=1",
+  "steps": [
+    {
+      "step": "wait:2200",
+      "ok": true
+    },
+    {
+      "step": "eval:__anJiao.goto('dock_exterior')",
+      "ok": true,
+      "value": "dock_exterior"
+    },
+    {
+      "step": "wait:900",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "eval:'A items=' + JSON.stringify(__anJiao.names()) + ' 什么都没捡'",
+      "ok": true,
+      "value": "A items=[] 什么都没捡"
+    },
+    {
+      "step": "click:646,890",
+      "ok": true
+    },
+    {
+      "step": "wait:1200",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:250",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:250",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:250",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:250",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:250",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:250",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:250",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:400",
+      "ok": true
+    },
+    {
+      "step": "eval:'B 老周首轮对白清完 flags=' + JSON.stringify(__anJiao.flags())",
+      "ok": true,
+      "value": "B 老周首轮对白清完 flags=[\"zhou_talked\"]"
+    },
+    {
+      "step": "click:646,890",
+      "ok": true
+    },
+    {
+      "step": "wait:900",
+      "ok": true
+    },
+    {
+      "step": "shot:shots/p1h-01-search-again.png",
+      "ok": true,
+      "path": "D:\\example\\deepseek\\an-jiao\\shots\\p1h-01-search-again.png"
+    },
+    {
+      "step": "eval:'C 未收集时再点老周 items=' + JSON.stringify(__anJiao.names()) + ' flags=' + JSON.stringify(__anJiao.flags())",
+      "ok": true,
+      "value": "C 未收集时再点老周 items=[] flags=[\"zhou_talked\"]"
+    },
+    {
+      "step": "wait:4200",
+      "ok": true
+    },
+    {
+      "step": "shot:shots/p1h-02-hint-gone.png",
+      "ok": true,
+      "path": "D:\\example\\deepseek\\an-jiao\\shots\\p1h-02-hint-gone.png"
+    },
+    {
+      "step": "eval:'D 4 秒后仍在第一章 active=' + JSON.stringify(__anJiao.active()) + ' items=' + __anJiao.names().length",
+      "ok": true,
+      "value": "D 4 秒后仍在第一章 active=[\"Explore\"] items=0"
+    },
+    {
+      "step": "click:646,890",
+      "ok": true
+    },
+    {
+      "step": "wait:900",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "click:360,950",
+      "ok": true
+    },
+    {
+      "step": "wait:300",
+      "ok": true
+    },
+    {
+      "step": "eval:'E 第二次再点，提示只弹一次、这次应推进 items=' + __anJiao.names().length",
+      "ok": true,
+      "value": "E 第二次再点，提示只弹一次、这次应推进 items=0"
+    }
+  ],
+  "exceptions": [],
+  "consoleErrors": [],
+  "consoleAll": [
+    {
+      "level": "log",
+      "text": "%cPhaser v4.2.1 (WebGL | Web Audio)%c https://phaser.io/v4021 color: #ffffff; background-image: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAOCAYAAAAmL5yKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAARBJREFUeNpi/P//P0OHsPB/BiCoePuWkYFEwALSXJElzMBgLwE2CNkQxgWr/yMr/p8QimlBu5DQ//+8vBBco/ofzAe6imH+qv/53/6jYJAYSA4ZoxoANYTPKhiuCQZwGcJU+e4dqpMmvsDq14krV2MPAxDha2CMKvoXoiE/PBQUDgQD8j82UFae9B9bOIC8B9UD9gIjjIMN7Ns6lWHn4XMoYu62RgxO3tkMjIyMII2MYAOAtmFVhA+ADHf2ycGMRhANjUq8YO+WKWCvgAORIV8CkpDCrzIwsLIymC1qAtuAD4Bsh3sBmqAY3qcGwL2AC4DCpKtzHlgzOLWihwEuzTCN0GhDJHeYC4gByBphACDAAH2dDIxdjr+VAAAAAElFTkSuQmCC\"), linear-gradient(to bottom, #000814, #001d3d, #003566); background-repeat: no-repeat; background-position: 4px center, 0 0; padding: 2px 6px 2px 24px; background: transparent"
+    },
+    {
+      "level": "log",
+      "text": "[dev] window.__anJiao 已挂载"
+    }
+  ],
+  "failedRequests": [],
+  "ok": true
+}

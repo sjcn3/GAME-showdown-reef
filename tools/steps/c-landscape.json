@@ -1,0 +1,13 @@
+[
+  "wait:2200",
+  "shot:shots/c/10-landscape-title.png",
+  "expect:getComputedStyle(document.getElementById('rotate-hint')).display === 'flex'",
+
+  "eval:__anJiao.goto('dock_exterior')",
+  "wait:1400",
+  "shot:shots/c/11-landscape-dock.png",
+  "expect:getComputedStyle(document.getElementById('rotate-hint')).display === 'flex'",
+  "expect:__anJiao.scene() === 'dock_exterior'",
+
+  "expect:getComputedStyle(document.getElementById('rotate-hint')).pointerEvents !== 'none'"
+]
