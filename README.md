@@ -94,8 +94,7 @@ npm run release -- --push-only      # 只补推当前 HEAD（网络抽风后补�
 **没有任何需要手点的步骤**。
 
 脚本按顺序做四件事：`npm run build`（构建失败就停，一个字节都不提交）→
-`git add -A` + `git add -f dist`（`dist` 在 `.gitignore` 里，得 `-f` 才进得去）→
-`commit` → 逐个远端推送。
+`git add -A` → `commit` → 逐个远端推送。
 
 两个远端是**分开推、分别报结果**的 —— GitHub 挂掉不会让整条命令返回非零，
 也就不会让人误以为「全都没推上去」而白干一遍。
@@ -137,6 +136,7 @@ git clone <仓库地址> /tmp/x && cd /tmp/x && npm ci && npm run build
 ```
 
 产物只有两个文件：`dist/index.html` + `dist/assets/index-<hash>.js`。
+**`dist/` 不进版本库** —— Vercel 每次自己跑 `npm run build`，仓库里不需要有它。
 
 > ⚠️ `.git` 有 54 MB —— 早期提交把 `node_modules` 和 `dist` 一起提交过
 > （历史里最大的单个对象 47.7 MB）。推 GitHub 到这个量级慢且容易断。

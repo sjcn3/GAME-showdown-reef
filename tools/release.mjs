@@ -9,7 +9,7 @@
  *
  * 按顺序做四件事：
  *   1. npm run build        构建失败就停，一个字节都不提交
- *   2. git add -A + add -f  dist 在 .gitignore 里，必须 -f 才进得去
+ *   2. 收集改动             git add -A（dist/ 不进库，见 .gitignore）
  *   3. commit
  *   4. 逐个远端推送          Gitee / GitHub 分别报结果，一个挂了不影响另一个
  *
@@ -128,20 +128,13 @@ if (!pushOnly) {
   console.log(C.bold('\n[2/4] 收集改动'));
   let staged;
   if (dryRun) {
-    // 不动索引：普通改动看 status；dist 里"新增但被 ignore"的文件要额外问一次
-    const names = new Set();
-    for (const l of git('status', '--porcelain', '-uall').split('\n').filter(Boolean)) {
-      if (!l.startsWith('!!')) names.add(cleanPath(l));
-    }
-    for (const l of git('status', '--porcelain', '--ignored=matching', '-uall', '--', 'dist')
+    // 不动索引。普通 status 就够了：--ignored 不加，忽略项本来就不会列出来
+    staged = git('status', '--porcelain', '-uall')
       .split('\n')
-      .filter(Boolean)) {
-      if (l.startsWith('!!')) names.add(cleanPath(l));
-    }
-    staged = [...names];
+      .filter((l) => l && !l.startsWith('!!'))
+      .map(cleanPath);
   } else {
     execFileSync('git', ['add', '-A']);
-    execFileSync('git', ['add', '-f', 'dist']);
     staged = git('diff', '--cached', '--name-only').split('\n').filter(Boolean);
   }
 

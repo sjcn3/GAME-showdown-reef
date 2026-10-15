@@ -2,11 +2,12 @@
 # node_modules 曾经被提交过（4415 个文件），.git 因此涨到 49 MB。
 node_modules/
 
-# 构建产物。这里 ignore 着，但**发布 Gitee Pages 时要手动 force-add**：
-#   npm run build
-#   git add -f dist && git commit -m "构建产物" && git push
-# Gitee Pages 只伺服仓库里已有的文件、不会替你构建，所以线上那份必须是提交过的。
-# 平时别 `git add .` 顺手带上它 —— 每次发布约多 1.5 MB 历史。
+# 构建产物，只在 `npm run build` 时生成在本机，不进版本库。
+# Vercel 从源码构建（vercel.json 的 buildCommand），不需要仓库里有 dist。
+# 曾经为伺服 Gitee Pages 而 force-add 进来过；Gitee Pages 已停服，那份产物不再
+# 有任何用途。更实际的理由：已跟踪的文件不受下面这条规则约束，而新生成的
+# index-<hash>.js 又会被它挡住 —— 用 VS Code「提交并推送」时，列表里只看得到
+# 「旧的 index-<hash>.js 被删除」，看不到「新的已经加进来」，提交上去是半截产物。
 dist/
 
 # 回归产物：tools/regress.mjs / tools/smoke.mjs 每次跑都会重拍上百张图
