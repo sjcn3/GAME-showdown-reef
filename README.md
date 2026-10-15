@@ -76,6 +76,28 @@ localStorage 里塞畸形存档（坏 JSON / 旧格式 / 版本不符 / `sceneId
 
 回归依赖 `?dev=1` 提供的 `__anJiao` 调试接口（`src/dev.ts`）。
 
+## 部署
+
+线上走 **GitHub → Vercel**，仓库里该配的都配好了，Vercel 那边导入仓库直接 Deploy 即可：
+
+- `vercel.json` —— 构建命令 `npm run build`、产物目录 `dist`、装依赖用 `npm ci`；
+  并给 `/assets/*` 加了 `immutable` 长缓存（文件名带内容哈希，可以放心缓存一年），
+  `index.html` 则每次回源。
+- `package.json` 的 `engines.node` = `>=22.12.0`（vite 8 的下限）。
+- `vite.config.ts` 的 `base: './'` —— 产物里全是相对路径，挂域名根目录或子路径都能跑。
+
+部署前想先本地验一遍「干净克隆能不能构建」：
+
+```bash
+git clone <仓库地址> /tmp/x && cd /tmp/x && npm ci && npm run build
+```
+
+产物只有两个文件：`dist/index.html` + `dist/assets/index-<hash>.js`。
+
+> ⚠️ 推 GitHub 之前留意：`.git` 现在有 54 MB —— 早期提交把 `node_modules`
+> 和 `dist` 一起提交过（历史里最大的单个对象 47.7 MB）。国内推 GitHub 到这个量级
+> 慢且容易断。瘦身命令见设计文档 §11.7。
+
 ## 目录
 
 ```
