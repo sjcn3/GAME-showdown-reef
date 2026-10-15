@@ -26,7 +26,9 @@
  *
  * 它**不做**的事：
  *   - 不替你写提交信息（除非你没给，那就用时间戳）
- *   - 推不动 Gitee Pages 的「更新」按钮 —— 那个只能在网页上点，免费版没开放 API
+ *
+ * Gitee 只当异地备份用。Gitee Pages 已于 2024 年前后停止服务（免费版本来也不支持
+ * 自定义域名，还要每次手点「更新」），所以这里没有「部署到 Gitee」这一步。
  */
 
 import { execSync, execFileSync } from 'node:child_process';
@@ -254,13 +256,13 @@ if (failed.length > 0) {
   );
 }
 
-console.log(
-  '\n' +
-    C.bold('还差一步：') +
-    ' Gitee Pages 不会跟着 push 走，去点一次「更新」\n' +
-    C.dim('  https://gitee.com/sjcn3/GAME-showdown-reef/pages') +
+if (failed.length === 0) {
+  console.log(
     '\n' +
-    C.dim('  （Vercel 不用管，它跟着 GitHub 自动构建）'),
-);
-
-if (failed.length > 0) process.exit(1);
+      C.bold('完成。') +
+      ' Vercel 会跟着 GitHub 自己重新构建，一两分钟后生效：\n' +
+      C.dim('  https://showdown-reef.top'),
+  );
+} else {
+  process.exit(1);
+}
