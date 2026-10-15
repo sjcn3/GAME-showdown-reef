@@ -3,11 +3,11 @@
 node_modules/
 dist/
 
-# 回归与证据产物：由 tools/regress.mjs / tools/smoke.mjs 生成。
-# `_` 开头的都是「按需跑、拍完即弃」的一次性证据，随时可以重新生成，
-# 所以只留 tools/steps/ 里的路线定义，不留产物。
-shots/_*/
-shots/*-report.json
+# 回归产物：tools/regress.mjs / tools/smoke.mjs 每次跑都会重拍上百张图
+# （雨、尘埃、灯光呼吸的相位每次都不同，97 张里 68 张会变），
+# 提交上去等于每次回归都往历史里塞 3 MB 二进制。
+# 想看图就自己跑一次回归；要给人看的静态截图在 docs/截图/。
+shots/
 
 # 编辑器 / 系统噪音
 .DS_Store
