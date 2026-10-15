@@ -192,8 +192,3 @@ export function collectiblesOf(scenes: readonly SceneDef[], chapter: number): It
   }
   return out;
 }
-
-/** 本章是否已全部收集完毕（决定章节能不能推进） */
-export function chapterComplete(scenes: readonly SceneDef[], chapter: number, state: GameState): boolean {
-  return collectiblesOf(scenes, chapter).every((id) => state.has(id));
-}

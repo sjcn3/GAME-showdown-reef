@@ -738,18 +738,3 @@ export function drawItemIcon(
     }
   }
 }
-
-/** 本模块能画的 11 个 id，顺序同 ALL_ITEM_IDS，供调用方铺接触印相表 */
-export const ICON_ITEM_IDS: readonly ItemId[] = [
-  'bronze_emblem',
-  'badge_half',
-  'cut_mark',
-  'mint_cigarette',
-  'altered_manifest',
-  'ship_log',
-  'list_fragment',
-  'crowbar',
-  'hold_key',
-  'customs_seal',
-  'ivory_sample',
-];

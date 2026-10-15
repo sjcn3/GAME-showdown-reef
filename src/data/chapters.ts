@@ -605,8 +605,6 @@ export const SCENES: Readonly<Record<string, SceneDef>> = {
   warehouse_night: warehouseNight,
 };
 
-export const SCENE_IDS = Object.keys(SCENES);
-
 /** 按章节取场景（给调试面板 / 单测用） */
 export function scenesOfChapter(chapter: number): SceneDef[] {
   return Object.values(SCENES).filter((s) => s.chapter === chapter);

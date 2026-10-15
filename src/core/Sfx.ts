@@ -33,17 +33,6 @@ export type SfxCue =
   | 'confront' // 对峙回合开始
   | 'ending'; // 结局
 
-export const SFX_CUES: readonly SfxCue[] = [
-  'hotspot',
-  'clue',
-  'keyItem',
-  'flashback',
-  'document',
-  'searchAgain',
-  'confront',
-  'ending',
-];
-
 /** 合成音的基准音量，和 synth.ts 里的总线增益保持一致，免得素材一进来响一大截 */
 const SAMPLE_GAIN = 0.25;
 
