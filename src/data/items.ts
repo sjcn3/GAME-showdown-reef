@@ -95,7 +95,7 @@ export const ITEMS: Readonly<Record<ItemId, ItemDef>> = {
     id: 'ship_log',
     name: '油轮航海日志',
     kind: 'clue',
-    desc: '最后一页是手写补入的：2026.08.08，锚地以东 7 海里，未报备。',
+    desc: '往锚地以东去的那三趟都没报备。最后一趟是手写补入的：2026.08.08，锚地以东 7 海里。',
     tags: ['cargo'],
   },
   list_fragment: {
@@ -103,6 +103,8 @@ export const ITEMS: Readonly<Record<ItemId, ItemDef>> = {
     name: '保护伞名单残页',
     kind: 'clue',
     desc: '“分管副局长 代号：信天翁”——撕口正好截在这一行之后。',
+    // 刻意不加 tag：残页只证明"有这么个代号"，证明不了"站在你面前的人就是他"。
+    // tests/EndingResolver.test.ts:269 就是钉这条设计的，别顺手改。
     tags: [],
   },
 
@@ -128,14 +130,14 @@ export const ITEMS: Readonly<Record<ItemId, ItemDef>> = {
     name: '海关封条',
     kind: 'extra',
     desc: '封条完好，但胶痕是重新压过的。',
-    tags: [],
+    tags: ['protection'],
   },
   ivory_sample: {
     id: 'ivory_sample',
     name: '象牙样本',
     kind: 'extra',
     desc: '断面很新。和铜徽一起藏在那道手抠出来的缝里。',
-    tags: [],
+    tags: ['protection'],
   },
 };
 

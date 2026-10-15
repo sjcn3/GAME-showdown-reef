@@ -21,6 +21,7 @@ import {
 import { DOCS } from '../data/documents';
 import { ITEMS, type ItemId } from '../data/items';
 import { preloadSfx, playSfx } from '../core/Sfx';
+import { saveProgress } from '../core/SaveManager';
 import { gameState } from '../store';
 import { hits, pickBranch, type Ctx, type DocId, type Effect, type SceneDef } from '../core/Story';
 import { addSceneFigures, PLACEHOLDER_PAINT } from '../art/placeholders';
@@ -112,6 +113,18 @@ export class ExploreScene extends Phaser.Scene {
     this.cameras.main.fadeIn(FADE_MS, 0, 0, 0);
 
     const firstVisit = gameState.markVisited(this.def.id);
+
+    // 存档点：每进入一个探索场景就落一次盘。
+    //
+    // 必须放在 markVisited **之后** —— 快照里的 visited 要已经含当前场景。
+    // 续玩时 TitleScene 会把当前场景从 visited 里抹掉再进来（见 forgetVisited），
+    // 于是 onEnter 正好重播一次，和"第一次走进来"完全一致。
+    //
+    // 存的是"进场景那一刻"，不是"每一帧"：玩家在场景里做的事（拿道具、翻文档）
+    // 都发生在离开这个场景之前，而离开就一定经过另一次 create —— 所以
+    // 任何一次进度推进之后，紧接着的那次 create 都会把它记下来。
+    saveProgress(this.def.id, gameState.snapshot());
+
     const queued: Effect[] = firstVisit && this.def.onEnter ? [...this.def.onEnter] : [];
     if (queued.length > 0) void this.run(queued);
   }
@@ -430,6 +443,14 @@ export class ExploreScene extends Phaser.Scene {
       await this.runEffects(effects, hotspotId);
     } finally {
       this.busy = false;
+      // 存档点之二：一次交互跑完就落盘。
+      //
+      // 只靠 create 那一次的话，"在一个场景里捡了东西、然后直接关掉页面"
+      // 会白捡 —— 那件道具根本没进过存档。
+      //
+      // 效果里带 goto 时这里存的是**旧** sceneId，但新场景的 create 紧接着
+      // （下一帧）就会用新 sceneId 覆盖掉，所以最终落盘的是新场景。
+      saveProgress(this.def.id, gameState.snapshot());
     }
   }
 

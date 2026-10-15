@@ -155,7 +155,7 @@ describe('对峙 · 流程', () => {
   });
 
   it('手里没有能打中的牌 → 不计破绽，剧情推进', () => {
-    // 三条线索的 tags 都是空的，打不中任何一回合
+    // 这三条都不是「身份」类，第一回合一张能打中的牌都没有
     const s = fresh('mint_cigarette', 'cut_mark', 'customs_seal');
     expect(s.present('mint_cigarette')).toBe('passed');
     expect(s.fumbleCount).toBe(0);

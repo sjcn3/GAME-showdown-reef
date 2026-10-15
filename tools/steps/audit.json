@@ -1,5 +1,6 @@
 [
   "wait:2600",
+  "eval:__anJiao.wipeSave()",
   "shot:shots/audit/00-prologue.png",
   "tap-center",
   "wait:1500",

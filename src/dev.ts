@@ -347,7 +347,7 @@ export function installDevHook(
       return s.devGallery?.() ?? null;
     },
     unlock: (...ids) => {
-      for (const id of ids) unlockEnding(id, null);
+      for (const id of ids) unlockEnding(id);
       return [...load().unlockedEndings];
     },
     wipeSave: () => {

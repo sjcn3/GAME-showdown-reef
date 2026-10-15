@@ -111,6 +111,21 @@ export class GameState {
     return true;
   }
 
+  /**
+   * 续玩用：把一个场景从「已到访」里抹掉，让它的 `onEnter` 再跑一遍。
+   *
+   * **只 restore 就开跑是不行的**：`visited` 里记着这个场景，
+   * `markVisited` 会返回 false，于是 `onEnter` 一声不响地不播。
+   * 而 `warehouse_night` 的 `onEnter` 就是「进对峙」—— 不重播的话，
+   * 玩家会站在一个没有任何热点的空仓库里，永远出不去。
+   *
+   * 安全性：全部 7 个 `onEnter` 里只有 `say` / `confrontation`，
+   * 没有 `give` / `flag` / `goto`，所以重播一次最多是重听一遍入场词。
+   */
+  forgetVisited(sceneId: string): void {
+    this.visited.delete(sceneId);
+  }
+
   // ── 标记位 ─────────────────────────────────
 
   setFlag(flag: Flag): void {

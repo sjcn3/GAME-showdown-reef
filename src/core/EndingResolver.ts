@@ -17,6 +17,7 @@ import {
 import {
   DETAIL_SLOT,
   ENDINGS,
+  FUMBLE_OVERFLOW_TEXT,
   FUMBLE_PARAGRAPHS,
   HOLLOW_WIN_DETAILS,
   TIPPED_OFF_NO_BACKUP_FIRST_PARAGRAPH,
@@ -203,6 +204,13 @@ function composeParagraphs(
   if (fumbleCount >= 1 && fumbleCount < MAX_FUMBLES) {
     const tail = FUMBLE_PARAGRAPHS[base];
     if (tail) paragraphs.push(tail);
+  }
+
+  // 破绽满 3：applyFumbles 会无条件把结局压成最坏的那一个，
+  // 但正文里原来没有任何一句交代"为什么突然就到这一步了"——
+  // 玩家看到的是话说一半直接跳。这一段就是那个缺口。
+  if (fumbleCount >= MAX_FUMBLES) {
+    paragraphs.push(...FUMBLE_OVERFLOW_TEXT);
   }
 
   return paragraphs;

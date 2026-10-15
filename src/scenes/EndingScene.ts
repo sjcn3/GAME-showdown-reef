@@ -130,7 +130,7 @@ export class EndingScene extends Phaser.Scene {
     }, { width: 260, height: 62, fontSize: 20 });
 
     if (!this.preview) {
-      unlockEnding(r.final, gameState.snapshot());
+      unlockEnding(r.final);
     }
     playSfx(this, 'ending');
 

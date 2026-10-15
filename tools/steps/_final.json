@@ -1,0 +1,20 @@
+[
+  "eval:__anJiao.wipeSave()",
+  "screen:Title",
+  "wait:1400",
+  "shot:shots/_final/title-on.png",
+  "click-title:音效开关",
+  "wait:700",
+  "shot:shots/_final/title-off.png",
+  "click-title:音效开关",
+  "wait:500",
+
+  "eval:__anJiao.give('bronze_emblem','cut_mark','badge_half','mint_cigarette')",
+  "eval:__anJiao.goto('warehouse_night')",
+  "wait:1200",
+  "eval:(function(){var s=window.__anJiao.state;var a=[];a.push(s.present('mint_cigarette'));a.push(s.present('bronze_emblem'));a.push(s.present('mint_cigarette'));a.push(s.present('cut_mark'));a.push(s.present('mint_cigarette'));return 'f='+s.fumbleCount+' over='+s.isConfrontationOver+' '+a.join(',')})()",
+  "wait:2000",
+  "shot:shots/_final/fumble3.png",
+  "settle",
+  "shot:shots/_final/overflow.png"
+]

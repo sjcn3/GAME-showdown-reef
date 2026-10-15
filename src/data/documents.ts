@@ -33,12 +33,15 @@ export const DOCS: Readonly<Record<DocId, DocDef>> = {
     title: '昌隆号 · 航海日志',
     lines: [
       { text: '2026.07.12　　沧澜港 → 外锚地　　已报备' },
-      { text: '2026.07.19　　沧澜港 → 外锚地　　已报备' },
+      { text: '2026.07.19　　沧澜港 → 锚地以东　　未报备' },
       { text: '2026.07.26　　沧澜港 → 外锚地　　已报备' },
-      { text: '2026.08.02　　沧澜港 → 外锚地　　已报备' },
+      { text: '2026.08.02　　沧澜港 → 锚地以东　　未报备' },
       { text: '' },
+      // 全篇**只有这一条**是手写 —— 密码 0808 的谜面就架在这上面：
+      // 多一条 hand，玩家就有两个日期可选，谜题立刻不可解。
+      // tests/story.test.ts:216 盯着这条。
       { text: '2026.08.08　　沧澜港 → 锚地以东 7 海里　　未报备', style: 'hand' },
-      { text: '（这一条的墨迹和别的都不一样。是后来补上去的。）', style: 'note' },
+      { text: '（前几条是打印的。最后这条的墨迹和打印的不一样，是后来才补上去的。）', style: 'note' },
     ],
   },
 
@@ -102,8 +105,6 @@ export const DOCS: Readonly<Record<DocId, DocDef>> = {
     ],
   },
 };
-
-export const DOC_IDS = Object.keys(DOCS) as DocId[];
 
 /**
  * 道具 → 它对应的可重读原件（证据列表用）。

@@ -3,6 +3,8 @@ import Phaser from 'phaser';
 import { COLORS, GAME_HEIGHT, GAME_WIDTH } from '../config';
 import { CHAPTER_FIRST_SCENE } from '../data/chapters';
 import { DEBUG_ENTRY, DEBUG_PANEL_OPEN } from '../debugPanel';
+import { clearProgress, load } from '../core/SaveManager';
+import { isMuted, setMuted } from '../core/Sfx';
 import { gameState } from '../store';
 import { CreditsPanel } from '../ui/CreditsPanel';
 import { FONT_SANS, FONT_SERIF, makeButton, toCss } from '../ui/theme';
@@ -53,6 +55,17 @@ function verticalGradient(
   }
 }
 
+/** 主按钮的配色。「开始调查」和「继续调查」共用 —— 它们占的是版面上同一格 */
+const PRIMARY_BUTTON = {
+  width: 380,
+  height: 72,
+  fontSize: 26,
+  font: FONT_SERIF,
+  fill: 0x1c2932,
+  hover: 0x2b3d47,
+  stroke: 0x44606e,
+} as const;
+
 export class TitleScene extends Phaser.Scene {
   /**
    * 标题页每个按钮的中心（游戏坐标），键是按钮上的文字。
@@ -62,6 +75,9 @@ export class TitleScene extends Phaser.Scene {
   readonly devButtons: Record<string, { x: number; y: number }> = {};
 
   private credits!: CreditsPanel;
+
+  /** 「重新开始」按过第一次没有（要按两次才真的清档） */
+  private restartArmed = false;
 
   constructor() {
     super('Title');
@@ -90,7 +106,9 @@ export class TitleScene extends Phaser.Scene {
     this.makeCoin();
 
     // 制作信息面板：常驻实例，靠 setVisible 开关（见 CreditsPanel 的注释）
+    this.restartArmed = false;
     this.credits = new CreditsPanel(this);
+    this.makeMuteToggle();
     this.devButtons['关闭制作信息'] = this.credits.closeButtonCenter;
 
     this.add
@@ -115,18 +133,29 @@ export class TitleScene extends Phaser.Scene {
     // 原来是 880/980/1064 配 76/68/60 —— 主次靠"越往下越扁"来表达，
     // 第 3 个比第 1 个矮了 16px，看着像没对齐而不是像层级。
     // 层级改用文字颜色和字号表达，几何一律统一。
-    this.button(884, '开始调查', () => {
-      gameState.reset();
-      this.scene.start('Explore', { sceneId: CHAPTER_FIRST_SCENE[0]! });
-    }, {
-      width: 380,
-      height: 72,
-      fontSize: 26,
-      font: FONT_SERIF,
-      fill: 0x1c2932,
-      hover: 0x2b3d47,
-      stroke: 0x44606e,
-    });
+    // 有存档 → 第一格是「继续调查」，底部另给一行「重新开始」；
+    // 没存档 → 第一格还是「开始调查」。
+    // 两种情况下 980 / 1076 两格的位置都不动：版面不因为有没有存档而变。
+    const saved = load().progress;
+    if (saved) {
+      this.button(884, '继续调查', () => {
+        gameState.restore(saved.snapshot);
+        // 把当前场景从 visited 里抹掉，让它的 onEnter 重播一次。
+        // 仓库那场的 onEnter 就是「进对峙」——不重播玩家会站在一个空场景里。
+        gameState.forgetVisited(saved.sceneId);
+        this.scene.start('Explore', { sceneId: saved.sceneId });
+      }, PRIMARY_BUTTON);
+    } else {
+      this.button(884, '开始调查', () => {
+        gameState.reset();
+        clearProgress();
+        this.scene.start('Explore', { sceneId: CHAPTER_FIRST_SCENE[0]! });
+      }, PRIMARY_BUTTON);
+    }
+    // 主按钮在 dev 钩子里的**固定**名字。
+    // 有存档时它的显示文字会变成「继续调查」，但回归路线里写的是
+    // `click-title:开始调查` —— 那些路线不该因为"这台机器上有没有存档"而时好时坏。
+    this.devButtons['开始调查'] = { x: GAME_WIDTH / 2, y: 884 };
 
     this.button(980, '结局图鉴', () => {
       this.scene.start('Gallery');
@@ -146,6 +175,35 @@ export class TitleScene extends Phaser.Scene {
       });
     }
 
+    // 有存档时才给「重新开始」。
+    // 它是**销毁进度**的操作，所以不能和「继续调查」长得一样重 ——
+    // 一行小字，而且要按两次：第一次只是把后果说清楚。
+    if (saved) {
+      const restartY = GAME_HEIGHT - 100;
+      const restartLabel = this.add
+        .text(GAME_WIDTH / 2, restartY, '重新开始', {
+          fontFamily: FONT_SANS,
+          fontSize: '18px',
+          color: '#6b7c88',
+        })
+        .setOrigin(0.5);
+      this.add
+        .rectangle(GAME_WIDTH / 2, restartY, 320, 56, 0x000000, 0)
+        .setInteractive({ useHandCursor: true })
+        .on('pointerdown', () => {
+          if (!this.restartArmed) {
+            this.restartArmed = true;
+            restartLabel.setText('再点一次 · 当前进度会被清掉');
+            restartLabel.setColor('#c9a227');
+            return;
+          }
+          gameState.reset();
+          clearProgress();
+          this.scene.start('Explore', { sceneId: CHAPTER_FIRST_SCENE[0]! });
+        });
+      this.devButtons['重新开始'] = { x: GAME_WIDTH / 2, y: restartY };
+    }
+
     this.add
       .text(GAME_WIDTH / 2, GAME_HEIGHT - 56, '‘钱江杯’大学生反走私创作比赛作品', {
         fontFamily: FONT_SANS,
@@ -153,6 +211,55 @@ export class TitleScene extends Phaser.Scene {
         color: '#55646e',
       })
       .setOrigin(0.5);
+  }
+
+  /**
+   * 右上角的音效开关。
+   *
+   * `src/core/Sfx.ts` 的 `isMuted` / `setMuted` 一直是完整的：状态有、
+   * localStorage 持久化有、`playSfx` 里那道 `if (muted) return` 也在，
+   * 差的只是一个调用方。所以这里补一个开关，而不是把那两个函数当死代码删掉。
+   *
+   * 只放标题页、不做常驻角标：其它界面都在"调查中"，不该再多一个角标；
+   * 而续玩已经能用，中途回标题页不再是清零操作。
+   */
+  private makeMuteToggle(): void {
+    const x = GAME_WIDTH - 64;
+    const y = 64;
+    const g = this.add.graphics();
+    const draw = (): void => {
+      const on = !isMuted();
+      g.clear();
+      // 喇叭本体
+      g.fillStyle(on ? 0x9fb4c0 : 0x46565f, 1);
+      g.fillRect(x - 12, y - 5, 7, 10);
+      g.fillTriangle(x - 5, y - 5, x + 3, y - 12, x + 3, y + 12);
+      if (on) {
+        g.lineStyle(2, 0x9fb4c0, 0.85);
+        g.beginPath();
+        g.arc(x + 5, y, 8, -0.95, 0.95);
+        g.strokePath();
+        g.lineStyle(2, 0x9fb4c0, 0.45);
+        g.beginPath();
+        g.arc(x + 5, y, 14, -0.95, 0.95);
+        g.strokePath();
+      } else {
+        // 关掉时画一道斜杠，比"变灰"更容易一眼看出来
+        g.lineStyle(3, 0xc9734f, 0.9);
+        g.lineBetween(x - 2, y - 11, x + 13, y + 11);
+      }
+    };
+    draw();
+    // 命中区比图形大得多：图形 28×24 在 320px 屏上只有 12 CSS px，
+    // 44×44 的命中区也才 20 CSS px。76×76 折合 33 CSS px，与标题页按钮同档。
+    this.add
+      .rectangle(x, y, 76, 76, 0x000000, 0)
+      .setInteractive({ useHandCursor: true })
+      .on('pointerdown', () => {
+        setMuted(!isMuted());
+        draw();
+      });
+    this.devButtons['音效开关'] = { x, y };
   }
 
   /**
