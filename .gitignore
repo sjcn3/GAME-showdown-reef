@@ -1,6 +1,12 @@
-# 依赖与构建产物：一条 npm install / npm run build 就能再生，不进版本库。
-# 这两个目录曾经被提交过（4415 + 2 个文件），.git 因此涨到 49 MB。
+# 依赖：一条 npm install 就能再生，不进版本库。
+# node_modules 曾经被提交过（4415 个文件），.git 因此涨到 49 MB。
 node_modules/
+
+# 构建产物。这里 ignore 着，但**发布 Gitee Pages 时要手动 force-add**：
+#   npm run build
+#   git add -f dist && git commit -m "构建产物" && git push
+# Gitee Pages 只伺服仓库里已有的文件、不会替你构建，所以线上那份必须是提交过的。
+# 平时别 `git add .` 顺手带上它 —— 每次发布约多 1.5 MB 历史。
 dist/
 
 # 回归产物：tools/regress.mjs / tools/smoke.mjs 每次跑都会重拍上百张图
