@@ -213,13 +213,16 @@ export class GameState {
     this.visited.clear();
     this.fumbledRounds.clear();
 
-    for (const id of snap.items) this.items.add(id);
-    for (const f of snap.flags) this.flags.add(f as Flag);
+    // 每个字段都给默认值。isProgress() 已经在存档边界挡过一道，但 restore
+    // 还会被 dev 钩子和单测直接调 —— 缺字段时宁可当成空档，也不要把异常
+    // 抛进事件处理器：那里抛出来的异常表现是「按钮点了没反应」，最难查。
+    for (const id of snap.items ?? []) this.items.add(id);
+    for (const f of snap.flags ?? []) this.flags.add(f as Flag);
     for (const v of snap.visited ?? []) this.visited.add(v);
-    for (const r of snap.fumbledRounds) this.fumbledRounds.add(r);
+    for (const r of snap.fumbledRounds ?? []) this.fumbledRounds.add(r);
 
-    this.fumbleCount = snap.fumbleCount;
-    this.roundIndex = snap.roundIndex;
+    this.fumbleCount = snap.fumbleCount ?? 0;
+    this.roundIndex = snap.roundIndex ?? 0;
   }
 
   reset(): void {

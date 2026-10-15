@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 
 import { COLORS, GAME_HEIGHT, GAME_WIDTH } from '../config';
-import { CHAPTER_FIRST_SCENE } from '../data/chapters';
+import { CHAPTER_FIRST_SCENE, SCENES } from '../data/chapters';
 import { DEBUG_ENTRY, DEBUG_PANEL_OPEN } from '../debugPanel';
 import { clearProgress, load } from '../core/SaveManager';
 import { isMuted, setMuted } from '../core/Sfx';
@@ -136,7 +136,12 @@ export class TitleScene extends Phaser.Scene {
     // 有存档 → 第一格是「继续调查」，底部另给一行「重新开始」；
     // 没存档 → 第一格还是「开始调查」。
     // 两种情况下 980 / 1076 两格的位置都不动：版面不因为有没有存档而变。
-    const saved = load().progress;
+    const raw = load().progress;
+    // sceneId 指向一个已经不存在的场景（改过场景 id 的旧档）—— 那不算"可续的档"。
+    // 放它过去的话 ExploreScene.init() 会静默回退到第一章：玩家带着一身后期道具
+    // 站在码头，而第一章用过的地方全是死的。宁可清掉、给「开始调查」。
+    const saved = raw && SCENES[raw.sceneId] ? raw : null;
+    if (raw && !saved) clearProgress();
     if (saved) {
       this.button(884, '继续调查', () => {
         gameState.restore(saved.snapshot);

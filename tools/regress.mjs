@@ -40,6 +40,11 @@ const DESKTOP = [
   ['audit', 'audit.json'],
   ['c-class', 'c-class.json'],
   ['art-characters', 'art-characters.json'],
+  // 坏档不能变成死按钮：往 localStorage 塞六种畸形存档（坏 JSON / 旧版裸快照 /
+  // 缺字段的快照 / version 2）再真的重新加载页面，最后验静音跨刷新持久化。
+  // 之所以要进矩阵：restore() 是在按钮的 pointerdown 里跑的，"点了没反应、
+  // 页面也不白屏"这种失效单测看不见，只有真点下去才知道。
+  ['bad-save', '_stress.json'],
 ];
 
 /**

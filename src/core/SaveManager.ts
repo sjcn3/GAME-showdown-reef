@@ -40,11 +40,19 @@ const EMPTY: SaveData = { version: 1, unlockedEndings: [], progress: null };
 function isProgress(v: unknown): v is Progress {
   if (typeof v !== 'object' || v === null) return false;
   const p = v as Partial<Progress>;
+  if (typeof p.sceneId !== 'string' || p.sceneId.length === 0) return false;
+  const s = p.snapshot as Partial<GameSnapshot> | null | undefined;
+  if (typeof s !== 'object' || s === null) return false;
+  // 四个数组 + 两个计数**逐个验**，不能只看「是个对象」。
+  // `restore()` 是直接 `for (const id of snap.items)` 的，少一个数组就会在
+  // 「继续调查」的 pointerdown 里抛 TypeError —— 表现是按钮点了没反应、
+  // 页面也不白屏，玩家只会以为游戏坏了。（visited 是可选字段，restore 里已有 ?? []。）
   return (
-    typeof p.sceneId === 'string' &&
-    p.sceneId.length > 0 &&
-    typeof p.snapshot === 'object' &&
-    p.snapshot !== null
+    Array.isArray(s.items) &&
+    Array.isArray(s.flags) &&
+    Array.isArray(s.fumbledRounds) &&
+    typeof s.fumbleCount === 'number' &&
+    typeof s.roundIndex === 'number'
   );
 }
 

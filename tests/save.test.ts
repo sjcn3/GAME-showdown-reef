@@ -125,3 +125,58 @@ describe('存档 · 续玩进度', () => {
     expect(d.unlockedEndings).toEqual([]);
   });
 });
+
+describe('存档 · 坏档不能变成死按钮', () => {
+  // 背景：`restore()` 是直接 `for (const id of snap.items)` 的，而 `isProgress()`
+  // 一开始只验到「snapshot 是个非空对象」。于是一个 `snapshot: {}` 的档会一路
+  // 走到「继续调查」的 pointerdown 里才抛 TypeError，被 Phaser 的输入回调吞掉 ——
+  // 表现是那个按钮点了完全没反应，页面不白屏、不重启，玩家只能以为游戏坏了。
+  // 这两条钉住边界：宁可让玩家从头开一局，也不要给一个死按钮。
+
+  it('progress.snapshot 是空对象 → load() 退回「没有进度」', () => {
+    setRaw({ version: 1, unlockedEndings: [], progress: { sceneId: 'corridor', snapshot: {} } });
+    expect(load().progress).toBeNull();
+  });
+
+  it('progress.snapshot 只有一部分数组 → 也算坏档', () => {
+    setRaw({
+      version: 1,
+      unlockedEndings: [],
+      progress: { sceneId: 'corridor', snapshot: { items: [], flags: [] } },
+    });
+    expect(load().progress).toBeNull();
+  });
+
+  it('progress.snapshot 计数不是数字 → 也算坏档', () => {
+    setRaw({
+      version: 1,
+      unlockedEndings: [],
+      progress: {
+        sceneId: 'corridor',
+        snapshot: { items: [], flags: [], visited: [], fumbledRounds: [], fumbleCount: '2', roundIndex: 0 },
+      },
+    });
+    expect(load().progress).toBeNull();
+  });
+
+  it('形状完整的档仍然读得回来（别把好档一起挡了）', () => {
+    const s = new GameState();
+    s.addItem('bronze_emblem');
+    s.markVisited('corridor');
+    saveProgress('corridor', s.snapshot());
+
+    const p = load().progress;
+    expect(p).not.toBeNull();
+    expect(p!.sceneId).toBe('corridor');
+    expect(p!.snapshot.items).toEqual(['bronze_emblem']);
+  });
+
+  it('restore 拿到缺字段的快照不抛异常，按空档处理', () => {
+    const s = new GameState();
+    s.addItem('bronze_emblem');
+    expect(() => s.restore({} as unknown as Parameters<GameState['restore']>[0])).not.toThrow();
+    expect(s.keyCount).toBe(0);
+    expect(s.roundIndex).toBe(0);
+    expect(s.fumbleCount).toBe(0);
+  });
+});
