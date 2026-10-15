@@ -6,6 +6,7 @@ import { DEBUG_ENTRY, DEBUG_PANEL_OPEN } from '../debugPanel';
 import { clearProgress, load } from '../core/SaveManager';
 import { isMuted, setMuted } from '../core/Sfx';
 import { gameState } from '../store';
+import { addCornerMark } from '../ui/CornerMark';
 import { CreditsPanel } from '../ui/CreditsPanel';
 import { FONT_SANS, FONT_SERIF, makeButton, toCss } from '../ui/theme';
 import { addRain, addShimmer, type ShimmerBand } from '../art/ambient';
@@ -216,6 +217,10 @@ export class TitleScene extends Phaser.Scene {
         color: '#55646e',
       })
       .setOrigin(0.5);
+
+    // 右下角的「中国反走私」标识。只放标题页 —— 调查界面底部整条是道具栏，
+    // 再压一个角标会跟道具抢位置（见 src/ui/CornerMark.ts）。
+    addCornerMark(this);
   }
 
   /**
