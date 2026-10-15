@@ -37,7 +37,7 @@ import { COLORS } from './config';
  * 也就是说，**开关一旦真的改成 'closed' 就编译不过**。
  * 断言成联合类型之后，初始化表达式的类型本身就是联合，收窄无从下手。
  */
-export const DEBUG_PANEL = 'open' as 'open' | 'closed';
+export const DEBUG_PANEL = 'closed' as 'open' | 'closed';
 
 /** 调试面板这一版露不露出来（下面全部由它派生，不要再手写第二处判断） */
 export const DEBUG_PANEL_OPEN: boolean = DEBUG_PANEL === 'open';
