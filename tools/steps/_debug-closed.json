@@ -1,0 +1,7 @@
+[
+  "screen:Title",
+  "wait:1000",
+  "assert:__anJiao.titleButton('判定表 · 调试面板') === null",
+  "assert:(function(){try{__anJiao.screen('Debug');return false}catch(e){return true}})()",
+  "shot:shots/_debug/closed-title.png"
+]

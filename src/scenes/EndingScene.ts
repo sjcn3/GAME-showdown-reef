@@ -3,18 +3,24 @@ import Phaser from 'phaser';
 import { COLORS, GAME_HEIGHT, GAME_WIDTH } from '../config';
 import { CHAPTER_FIRST_SCENE } from '../data/chapters';
 import { ENDINGS } from '../data/endings';
+import type { EndingId } from '../data/endings';
 import { unlockEnding } from '../core/SaveManager';
 import { playSfx } from '../core/Sfx';
 import { gameState } from '../store';
 import type { ResolvedEnding } from '../core/EndingResolver';
 import { FONT_SANS, FONT_SERIF, drawRule, makeButton, toCss } from '../ui/theme';
 import { cjkWrap } from '../ui/cjkWrap';
-import { paintEndingPlate } from '../art/placeholders';
+import { paintEndingPlate } from '../art/endingPlates';
 
 interface EndingData {
   readonly resolved?: ResolvedEnding;
   /** 调试面板预览时不写存档 */
   readonly preview?: boolean;
+  /**
+   * 仅调试：把这一屏**钉死**在某个结局上（`__anJiao.plate(id)`）。
+   * 六个结局的插画是六张不同的画，只有这个口子能一张一张单独截出来核对。
+   */
+  readonly forceEnding?: EndingId;
 }
 
 /**
@@ -40,6 +46,7 @@ export class EndingScene extends Phaser.Scene {
   private resolved!: ResolvedEnding;
   private preview = false;
   private plateDrawn = false;
+  private forcedEnding?: EndingId;
 
   constructor() {
     super('Ending');
@@ -48,17 +55,21 @@ export class EndingScene extends Phaser.Scene {
   init(data: EndingData): void {
     this.resolved = data.resolved ?? gameState.resolve();
     this.preview = data.preview ?? false;
+    this.forcedEnding = data.forceEnding;
   }
 
   create(): void {
     const r = this.resolved;
+    // 调试预览时整屏按被钉住的那个结局来画：色调、标题、插画三处必须同源，
+    // 否则截出来是「A 的插画 + B 的色调」，验收等于没验。
+    const def = this.forcedEnding ? ENDINGS[this.forcedEnding] : r.def;
 
     this.cameras.main.setBackgroundColor(COLORS.bg);
     this.add
-      .rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, r.def.frameTint, FRAME_TINT_ALPHA);
+      .rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, def.frameTint, FRAME_TINT_ALPHA);
 
     this.add
-      .text(GAME_WIDTH / 2, 96, `结局 · ${r.def.name}`, {
+      .text(GAME_WIDTH / 2, 96, `结局 · ${def.name}`, {
         fontFamily: FONT_SERIF,
         fontSize: '36px',
         color: toCss(COLORS.ink),
@@ -99,10 +110,12 @@ export class EndingScene extends Phaser.Scene {
       if (body.height <= BODY_BOTTOM - BODY_TOP) break;
     }
 
-    // 结局插画：固定槽位。以前是"正文短才配图"，现在六个结局一律有图 ——
-    // 插画是这一屏唯一的情绪载体，不该由文案长度决定它存不存在。
+    // 结局插画：固定槽位，**六个结局各画一张**（见 `art/endingPlates.ts`）。
+    // 以前六个结局共用同一张「退潮礁石 + 铜徽」，只有压色不同 —— 玩家走到最坏的
+    // 「打草惊蛇」和最完美的「潮落」，看到的画面一模一样。插画是这一屏唯一的
+    // 情绪载体，它得自己说清楚"你这次把案子办成了什么样"。
     const plate = this.add.graphics();
-    paintEndingPlate(plate, 62, PLATE_TOP, GAME_WIDTH - 124, PLATE_BOTTOM - PLATE_TOP, r.def.frameTint);
+    paintEndingPlate(plate, 62, PLATE_TOP, GAME_WIDTH - 124, PLATE_BOTTOM - PLATE_TOP, def.id, def.frameTint);
     this.plateDrawn = true;
 
     const lastY = GAME_HEIGHT - 150;
@@ -148,9 +161,11 @@ export class EndingScene extends Phaser.Scene {
     plate: boolean;
   } {
     const r = this.resolved;
+    // 钉住之后报的是被钉住的那个结局 —— 截图脚本靠它确认这一张到底画的是谁
+    const def = this.forcedEnding ? ENDINGS[this.forcedEnding] : r.def;
     return {
-      id: r.final,
-      name: r.def.name,
+      id: def.id,
+      name: def.name,
       base: r.base,
       downgraded: r.downgraded,
       forcedWorst: r.forcedWorst,

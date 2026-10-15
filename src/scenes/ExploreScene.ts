@@ -16,13 +16,15 @@ import {
   CHAPTER_FIRST_SCENE,
   SCENES,
   chapterDone,
+  CHAPTERS,
 } from '../data/chapters';
 import { DOCS } from '../data/documents';
 import { ITEMS, type ItemId } from '../data/items';
 import { preloadSfx, playSfx } from '../core/Sfx';
 import { gameState } from '../store';
 import { hits, pickBranch, type Ctx, type DocId, type Effect, type SceneDef } from '../core/Story';
-import { PLACEHOLDER_PAINT } from '../art/placeholders';
+import { addSceneFigures, PLACEHOLDER_PAINT } from '../art/placeholders';
+import { addSceneAmbient } from '../art/sceneAmbient';
 import { BackButton } from '../ui/BackButton';
 import { ChapterCard } from '../ui/ChapterCard';
 import { DocumentOverlay } from '../ui/DocumentOverlay';
@@ -80,6 +82,12 @@ export class ExploreScene extends Phaser.Scene {
     const painter = PLACEHOLDER_PAINT[this.def.paintKey];
     if (painter) painter(art, GAME_WIDTH, STAGE_HEIGHT);
     else console.warn(`[ExploreScene] 场景 ${this.def.id} 没有占位绘制：${this.def.paintKey}`);
+
+    // 第 2 组 B1/B2：会下的雨、会呼吸的灯、会晃的水面、会飘的尘埃。
+    // 挂在这一层是安全的 —— 动效层深度 20~24，在所有 UI（400 起）之下。
+    addSceneAmbient(this, this.def.paintKey);
+    // 第 2 组 B5：人物独立成层，各自待机呼吸（深度 10，压在雨和尘埃后面）
+    addSceneFigures(this, this.def.paintKey);
 
     this.textBox = new TextBox(this);
     this.evidence = new EvidenceLog(this, (id) => void this.reread(id));
@@ -371,6 +379,19 @@ export class ExploreScene extends Phaser.Scene {
    */
   devRippleCount(): number {
     return this.rippleCount;
+  }
+
+  /**
+   * 仅供开发钩子：直接弹一次章节卡。
+   *
+   * 章节卡只在 `advanceChapter` 里出现，而推进章节得先凑齐本章道具再走完
+   * 一段对话 —— 想截全三张卡就得跑三条完整路线。给一个口子，三张卡各自的
+   * 版面（每章一个色调、一个序号水印）一次就能截完。
+   */
+  devChapterCard(index: number): boolean {
+    if (!CHAPTERS[index]) return false;
+    void this.card.show(index);
+    return true;
   }
 
   /**

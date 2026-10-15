@@ -3,7 +3,7 @@
   "eval:__anJiao.goto('dock_exterior')",
   "wait:900",
   "settle",
-  "shot:shots/p1-01-enter.png",
+  "shot:shots/p1/p1-01-enter.png",
 
   "eval:__anJiao.clearSfx()",
 
@@ -11,29 +11,29 @@
   "settle",
   "assert:__anJiao.items().includes('crowbar')",
   "assert:__anJiao.sfx().includes('hotspot')",
-  "shot:shots/p1-02-crowbar.png",
+  "shot:shots/p1/p1-02-crowbar.png",
 
   "click-spot:seal",
   "settle",
   "assert:__anJiao.items().includes('customs_seal')",
-  "shot:shots/p1-03-seal.png",
+  "shot:shots/p1/p1-03-seal.png",
 
   "click-spot:cigarette",
   "settle",
   "assert:__anJiao.items().includes('mint_cigarette')",
-  "shot:shots/p1-04-cigarette.png",
+  "shot:shots/p1/p1-04-cigarette.png",
 
   "click-spot:vent",
   "settle",
   "assert:__anJiao.scene() === 'dock_exterior'",
-  "shot:shots/p1-05-vent-rusty.png",
+  "shot:shots/p1/p1-05-vent-rusty.png",
 
   "hold-item:crowbar",
   "click-spot:vent",
   "settle",
   "assert:__anJiao.scene() === 'container_interior'",
   "assert:__anJiao.flags().includes('vent_opened')",
-  "shot:shots/p1-06-interior.png",
+  "shot:shots/p1/p1-06-interior.png",
 
   "click-spot:wall",
   "settle",
@@ -46,7 +46,7 @@
   "assert:__anJiao.items().includes('altered_manifest')",
   "assert:__anJiao.flags().includes('crates_opened')",
   "assert:__anJiao.sfx().includes('document')",
-  "shot:shots/p1-07-manifest.png",
+  "shot:shots/p1/p1-07-manifest.png",
 
   "hold-item:crowbar",
   "click-spot:cache",
@@ -54,7 +54,7 @@
   "assert:__anJiao.items().includes('bronze_emblem')",
   "assert:__anJiao.items().includes('ivory_sample')",
   "assert:__anJiao.flags().includes('cache_opened')",
-  "shot:shots/p1-08-flashback.png",
+  "shot:shots/p1/p1-08-flashback.png",
 
   "drop-item",
   "click-spot:back_out",
@@ -64,12 +64,12 @@
   "click-spot:zhou",
   "settle",
   "assert:__anJiao.flags().includes('zhou_talked')",
-  "shot:shots/p1-09-zhou.png",
+  "shot:shots/p1/p1-09-zhou.png",
 
   "click-spot:zhou",
   "settle",
   "assert:__anJiao.scene() === 'captain_cabin'",
-  "shot:shots/p1-10-chapter-card.png",
+  "shot:shots/p1/p1-10-chapter-card.png",
 
   "eval:JSON.stringify({ items: __anJiao.items(), keys: __anJiao.keyCount(), clues: __anJiao.clueCount(), flags: __anJiao.flags() })",
   "assert:__anJiao.keyCount() === 1",

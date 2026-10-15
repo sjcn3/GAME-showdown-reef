@@ -4,8 +4,8 @@
   "eval:__anJiao.goto('warehouse_night')",
   "wait:800",
   "settle",
-  "shot:shots/p3e-01-empty-hands.png",
+  "shot:shots/p3e/p3e-01-empty-hands.png",
   "settle",
-  "shot:shots/p3e-02-ending.png",
+  "shot:shots/p3e/p3e-02-ending.png",
   "eval:__anJiao.ending()"
 ]

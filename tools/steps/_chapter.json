@@ -1,0 +1,21 @@
+[
+  "screen:Title",
+  "wait:1200",
+  "shot:shots/_chapter/title.png",
+
+  "eval:__anJiao.goto('dock_exterior')",
+  "wait:1000",
+  "eval:__anJiao.chapterCard(0)",
+  "wait:800",
+  "shot:shots/_chapter/card1.png",
+  "wait:2400",
+
+  "eval:__anJiao.chapterCard(1)",
+  "wait:800",
+  "shot:shots/_chapter/card2.png",
+  "wait:2400",
+
+  "eval:__anJiao.chapterCard(2)",
+  "wait:800",
+  "shot:shots/_chapter/card3.png"
+]

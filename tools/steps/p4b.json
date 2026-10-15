@@ -40,5 +40,5 @@
   "assert:__anJiao.sfx().filter((c) => c === 'flashback').length === 1",
   "assert:__anJiao.sfx().filter((c) => c === 'searchAgain').length === 1",
   "assert:__anJiao.items().length === 7",
-  "shot:shots/p4-04-sfx-route.png"
+  "shot:shots/p4/p4-04-sfx-route.png"
 ]

@@ -12,7 +12,7 @@ import Phaser from 'phaser';
 
 import { CHAPTER_FIRST_SCENE, SCENES } from './data/chapters';
 import { ALL_ITEM_IDS, ITEMS, type ItemId } from './data/items';
-import type { EndingId } from './data/endings';
+import { ENDINGS, type EndingId } from './data/endings';
 import type { GameState } from './core/GameState';
 import { load, resetAll, unlockEnding } from './core/SaveManager';
 import { clearSfxHistory, sfxHistory } from './core/Sfx';
@@ -54,6 +54,11 @@ export interface DevApi {
   neutral(): { x: number; y: number } | null;
   /** 标题页某个按钮的页面坐标（按文字取，例如「开始调查」）；不在标题页返回 null */
   titleButton(text: string): { x: number; y: number } | null;
+  /**
+   * 标题页的制作信息面板开着没有。不在标题页返回 null ——
+   * 把「不在这屏」和「在这屏但关着」分开，断言才不会恒真。
+   */
+  titleCredits(): boolean | null;
   /** 画布正中的页面坐标 —— 给「点哪都行」的画面（序章）用，别写死坐标 */
   center(): { x: number; y: number };
   /**
@@ -73,12 +78,25 @@ export interface DevApi {
   wipeSave(): string;
   /** 跳到任意已注册的场景（Title / Gallery / Debug / Explore …） */
   screen(key: string): string;
+  /**
+   * 把结局屏钉在指定结局上并跳过去（不写存档）。
+   * 六个结局的插画是六张不同的画，没有这个口子就只能靠"凑道具凑出某个结局"
+   * 来一张张截图 —— 凑不出来的那几张就永远没人看过。
+   */
+  plate(id: EndingId): EndingId;
   /** 最近响过哪些音效 cue（新的在后） */
   sfx(): string[];
   /** 清空音效记录，好让每一段断言只看自己那几步 */
   clearSfx(): string;
   /** 跳到某个探索场景（会重置当前场景的实例，不动 state） */
   goto(sceneId: string): string;
+  /**
+   * 在当前探索场景里直接弹一次章节卡（不写 state，不推进章节）。
+   * 章节卡只在 advanceChapter 里出现，而推进章节要么得凑齐道具、
+   * 要么得点完一整段对话 —— 三张卡就是三条完整路线。有了这个口子，
+   * 三张卡各自的版面一次就能截全。
+   */
+  chapterCard(index: number): boolean | null;
   /** 回到第一章开头并清空状态 */
   restart(): string;
   /**
@@ -122,6 +140,8 @@ export interface IdleInfo {
 /** 标题页给开发钩子的口子。 */
 export interface TitleQuery {
   readonly devButtons: Record<string, { x: number; y: number }>;
+  /** 制作信息面板开着没有。必须是方法 —— 属性会在挂钩子那一刻定格成旧值 */
+  devCreditsOpen(): boolean;
 }
 
 export interface ConfrontInfo {
@@ -162,6 +182,8 @@ interface ExploreQuery {
   devEvidenceRows?: () => { rows: Record<string, { x: number; y: number }>; close: { x: number; y: number } } | null;
   devBack?: () => { x: number; y: number; armed: boolean };
   devRippleCount?: () => number;
+  /** 直接弹一次章节卡（烟测专用，不推进章节） */
+  devChapterCard?: (index: number) => boolean;
 }
 
 /** ConfrontationScene 同样只开一个查询口 */
@@ -294,6 +316,7 @@ export function installDevHook(
     idle: () => explore()?.devIdle?.() ?? null,
     neutral: () => toPage(explore()?.devNeutral?.() ?? null),
     titleButton: (text) => toPage(titleScene()?.devButtons?.[text] ?? null),
+    titleCredits: () => titleScene()?.devCreditsOpen?.() ?? null,
     center: () => {
       const r = canvasRect();
       return { x: Math.round(r.x + r.width / 2), y: Math.round(r.y + r.height / 2) };
@@ -331,6 +354,7 @@ export function installDevHook(
       resetAll();
       return 'save cleared';
     },
+    chapterCard: (index) => explore()?.devChapterCard?.(index) ?? null,
     screen: (key) => {
       if (!game.scene.keys[key]) throw new Error(`没有这个场景 key：${key}`);
       for (const s of game.scene.getScenes(true)) {
@@ -338,6 +362,18 @@ export function installDevHook(
       }
       game.scene.start(key);
       return key;
+    },
+    plate: (id) => {
+      if (!ENDINGS[id]) throw new Error(`没有这个结局：${id}`);
+      for (const s of game.scene.getScenes(true)) {
+        if (s.scene.key !== 'Ending') s.scene.stop();
+      }
+      game.scene.start('Ending', {
+        resolved: gameState.resolve(),
+        preview: true,
+        forceEnding: id,
+      });
+      return id;
     },
     sfx: () => [...sfxHistory()],
     clearSfx: () => {

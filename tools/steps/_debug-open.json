@@ -1,0 +1,10 @@
+[
+  "screen:Title",
+  "wait:1000",
+  "assert:__anJiao.titleButton('判定表 · 调试面板') !== null",
+  "shot:shots/_debug/open-title.png",
+  "click-title:判定表 · 调试面板",
+  "wait:900",
+  "assert:__anJiao.active().indexOf('Debug') !== -1",
+  "shot:shots/_debug/open-panel.png"
+]

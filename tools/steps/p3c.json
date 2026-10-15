@@ -18,8 +18,8 @@
   "settle",
   "hold-item:mint_cigarette",
   "click-confront:chief",
-  "shot:shots/p3c-01-third-fumble.png",
+  "shot:shots/p3c/p3c-01-third-fumble.png",
   "settle",
-  "shot:shots/p3c-02-ending.png",
+  "shot:shots/p3c/p3c-02-ending.png",
   "eval:__anJiao.ending()"
 ]

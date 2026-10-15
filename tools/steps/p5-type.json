@@ -18,9 +18,9 @@
     "settle",
     "assert:__anJiao.ending() \u0026\u0026 __anJiao.ending().id === \u0027tide_ebb\u0027",
     "eval:(()=\u003e{const s=__anJiao.game.scene.getScenes(true)[0];const bad=[];for(const o of s.children.list){const t=o.text;if(typeof t!==\u0027string\u0027)continue;const w=o.getWrappedText?o.getWrappedText():t;const ls=Array.isArray(w)?w:String(w).split(\u0027\\n\u0027);for(const L of ls){if(!L)continue;if(\u0027，。、；：？！）」』\u0027.indexOf(L[0])\u003e=0)bad.push(L.slice(0,16));}}return bad;})()",
-    "shot:shots/p5-01-ending-wrap.png",
+    "shot:shots/p5/p5-01-ending-wrap.png",
     "screen:Gallery",
     "wait:600",
     "eval:(()=\u003e{const s=__anJiao.game.scene.getScenes(true)[0];const bad=[];for(const o of s.children.list){const t=o.text;if(typeof t!==\u0027string\u0027)continue;const w=o.getWrappedText?o.getWrappedText():t;const ls=Array.isArray(w)?w:String(w).split(\u0027\\n\u0027);for(const L of ls){if(!L)continue;if(\u0027，。、；：？！）」』\u0027.indexOf(L[0])\u003e=0)bad.push(L.slice(0,16));}}return bad;})()",
-    "shot:shots/p5-02-gallery-wrap.png"
+    "shot:shots/p5/p5-02-gallery-wrap.png"
 ]

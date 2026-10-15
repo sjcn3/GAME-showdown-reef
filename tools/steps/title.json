@@ -1,0 +1,16 @@
+[
+  "wait:2600",
+  "tap-center",
+  "wait:1500",
+  "shot:shots/title/00-title.png",
+
+  "click-title:硬币",
+  "wait:800",
+  "assert:__anJiao.titleCredits() === true",
+  "shot:shots/title/01-credits.png",
+
+  "click-title:关闭制作信息",
+  "wait:600",
+  "assert:__anJiao.titleCredits() === false",
+  "shot:shots/title/02-closed.png"
+]

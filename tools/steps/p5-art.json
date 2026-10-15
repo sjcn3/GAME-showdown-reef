@@ -18,10 +18,10 @@
   "settle",
   "assert:__anJiao.ending() && __anJiao.ending().id === 'tide_ebb'",
   "assert:__anJiao.ending().plate === true",
-  "shot:shots/p5-03-ending-plate.png",
+  "shot:shots/p5/p5-03-ending-plate.png",
   "screen:Gallery",
   "wait:600",
-  "shot:shots/p5-04-gallery.png",
+  "shot:shots/p5/p5-04-gallery.png",
   "screen:Ending",
   "wait:600",
   "assert:__anJiao.ending() && __anJiao.ending().plate === true"

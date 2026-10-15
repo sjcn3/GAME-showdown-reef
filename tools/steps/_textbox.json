@@ -1,0 +1,9 @@
+[
+  "eval:__anJiao.restart()",
+  "eval:__anJiao.goto('warehouse_approach')",
+  "wait:3000",
+  "shot:shots/_textbox/short.png",
+  "click-spot:radio",
+  "wait:2200",
+  "shot:shots/_textbox/long.png"
+]

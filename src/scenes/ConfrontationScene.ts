@@ -11,7 +11,8 @@
 
 import Phaser from 'phaser';
 
-import { PLACEHOLDER_PAINT } from '../art/placeholders';
+import { addSceneFigures, PLACEHOLDER_PAINT } from '../art/placeholders';
+import { addSceneAmbient } from '../art/sceneAmbient';
 import { COLORS, GAME_WIDTH, STAGE_HEIGHT } from '../config';
 import {
   CLOSING_LINES,
@@ -83,6 +84,11 @@ export class ConfrontationScene extends Phaser.Scene {
     const painter = PLACEHOLDER_PAINT['warehouse_night'];
     if (painter) painter(art, GAME_WIDTH, STAGE_HEIGHT);
 
+    // 第 2 组 B1/B2：会下的雨、会晃的湿地反光、会飘的尘埃
+    addSceneAmbient(this, 'warehouse_night');
+    // 第 2 组 B5：两个人物各自独立成层，呼吸周期不同（同步呼吸像在一起点头）
+    addSceneFigures(this, 'warehouse_night');
+
     // 这一层画在场景之上、对话框（深度 500）之下
     this.highlight = this.add.graphics().setDepth(400);
     this.tweens.add({
@@ -97,8 +103,10 @@ export class ConfrontationScene extends Phaser.Scene {
     // 顶部标签原本在 y=54、18px、#6b7c88 —— 全屏最暗的正文，却要承担
     // "这一回合该应付谁"这样唯一的指路信息，而且贴在刘海区里。
     // 提亮、加大、下移。
+    // y=86 时实测墨迹落在 y75–95，顶端仍有 5px 探进刘海区；
+    // 这一版压到 y=96（墨迹约 y85–105），整行都在安全线以下。
     this.roundLabel = this.add
-      .text(GAME_WIDTH / 2, 86, '', {
+      .text(GAME_WIDTH / 2, 96, '', {
         fontFamily: FONT_SANS,
         fontSize: '21px',
         color: '#9aa7b2',

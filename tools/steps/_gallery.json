@@ -1,0 +1,16 @@
+[
+  "eval:__anJiao.wipeSave()",
+  "screen:Gallery",
+  "wait:800",
+  "shot:shots/_gallery/locked.png",
+
+  "eval:__anJiao.unlock('tide_ebb')",
+  "screen:Gallery",
+  "wait:800",
+  "shot:shots/_gallery/one.png",
+
+  "eval:__anJiao.unlock('torn_page','lost_emblem','broken_number','hollow_win','tipped_off')",
+  "screen:Gallery",
+  "wait:800",
+  "shot:shots/_gallery/full.png"
+]

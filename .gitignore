@@ -1,0 +1,15 @@
+# 依赖与构建产物：一条 npm install / npm run build 就能再生，不进版本库。
+# 这两个目录曾经被提交过（4415 + 2 个文件），.git 因此涨到 49 MB。
+node_modules/
+dist/
+
+# 回归与证据产物：由 tools/regress.mjs / tools/smoke.mjs 生成。
+# `_` 开头的都是「按需跑、拍完即弃」的一次性证据，随时可以重新生成，
+# 所以只留 tools/steps/ 里的路线定义，不留产物。
+shots/_*/
+shots/*-report.json
+
+# 编辑器 / 系统噪音
+.DS_Store
+Thumbs.db
+*.log

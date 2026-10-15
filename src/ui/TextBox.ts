@@ -23,10 +23,21 @@ const PANEL_TOP = 812;
 const PANEL_BOTTOM = STAGE_HEIGHT;
 /** 正文距面板顶的距离（先给说话人留出位置） */
 const BODY_OFFSET = 62;
+/**
+ * 面板底色。
+ *
+ * 抽成常量是因为 `layout()` 里要拿它画两次（实心块 + 渐隐带四角），
+ * 两处颜色一旦不同，接缝处就会显出一条深浅不一的分界。
+ */
+const PANEL_FILL = 0x080b0e;
 
 export class TextBox {
   private readonly container: Phaser.GameObjects.Container;
-  private readonly bg: Phaser.GameObjects.Rectangle;
+  /**
+   * 面板底。**每次 layout() 都 clear() 重画**，不能用 Rectangle：
+   * Rectangle 只有纯色填充，画不出"上半实心、下半渐隐"那条无缝的过渡。
+   */
+  private readonly bg: Phaser.GameObjects.Graphics;
   private readonly bottomLine: Phaser.GameObjects.Rectangle;
   private readonly speaker: Phaser.GameObjects.Text;
   private readonly body: Phaser.GameObjects.Text;
@@ -39,9 +50,8 @@ export class TextBox {
   private running = false;
 
   constructor(private readonly scene: Phaser.Scene) {
-    const height = PANEL_BOTTOM - PANEL_TOP;
-
-    this.bg = scene.add.rectangle(0, PANEL_TOP, GAME_WIDTH, height, 0x080b0e, 0.9).setOrigin(0, 0);
+    // 底不能在这里定尺寸：高度由 layout() 按这一行的行数重画。
+    this.bg = scene.add.graphics();
     const topLine = scene.add.rectangle(0, PANEL_TOP, GAME_WIDTH, 1, 0x33454f, 0.9).setOrigin(0, 0);
     this.bottomLine = scene.add.rectangle(0, PANEL_BOTTOM, GAME_WIDTH, 1, 0x33454f, 0.5).setOrigin(0, 0);
 
@@ -136,12 +146,32 @@ export class TextBox {
    * 但一行 6 字的短台词配一块 291px 高的面板、其中 180px 是空的，
    * 而唯一提示"点一下继续"的三角被推到最下缘 —— 两头都别扭。
    * 现在面板贴着文字收，多的那块地还给场景。
+   *
+   * **但"收"只收实心部分，可见范围永远到 `PANEL_BOTTOM`。**
+   * 早先实心块直接收在文字下面，于是短台词时下面露出一整条 148px 的场景，
+   * 而且底边是一条硬线、每换一行就"啪"地跳一次 —— 露出来的那块地不但没还成，
+   * 反而成了画面上一道会动的横杠。现在实心块下面接一段从 0.9 渐隐到 0 的
+   * 渐隐带、一路铺到舞台底边：露场景的效果留着，硬边和跳动都没了。
+   * 台词越长实心块越高、渐隐带越短；占满三行时渐隐带长度为 0，正好是实心到底。
    */
   private layout(lineHeight: number): void {
     const h = Math.min(PANEL_BOTTOM - PANEL_TOP, Math.max(96, BODY_OFFSET + lineHeight + 26));
-    this.bg.setSize(GAME_WIDTH, h);
-    this.bottomLine.setY(PANEL_TOP + h);
-    this.caret.setY(PANEL_TOP + h - 38);
+    const solidBottom = PANEL_TOP + h;
+    const fadeH = PANEL_BOTTOM - solidBottom;
+
+    this.bg.clear();
+    // 内容区：实心。文字必须永远坐在实底上，不然读起来是浮的。
+    this.bg.fillStyle(PANEL_FILL, 0.9);
+    this.bg.fillRect(0, PANEL_TOP, GAME_WIDTH, h);
+    if (fadeH > 0) {
+      // 渐隐带：四角同色、只让 alpha 从 0.9 掉到 0。
+      // 起点 alpha 与实心块相同，所以接缝处看不出分界。
+      this.bg.fillGradientStyle(PANEL_FILL, PANEL_FILL, PANEL_FILL, PANEL_FILL, 0.9, 0.9, 0, 0);
+      this.bg.fillRect(0, solidBottom, GAME_WIDTH, fadeH);
+    }
+
+    this.bottomLine.setY(solidBottom);
+    this.caret.setY(solidBottom - 38);
   }
 
   private renderLine(): void {

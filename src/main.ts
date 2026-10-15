@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 
 import { COLORS, GAME_HEIGHT, GAME_WIDTH } from './config';
+import { DEBUG_PANEL_OPEN } from './debugPanel';
 import { installDevHook } from './dev';
 import { BootScene } from './scenes/BootScene';
 import { PrologueScene } from './scenes/PrologueScene';
@@ -31,7 +32,11 @@ const config = {
     TitleScene,
     ExploreScene,
     ConfrontationScene,
-    DebugScene,
+    // 调试面板：关掉时连场景都不注册（开关在 src/debugPanel.ts 一行）。
+    // 场景类仍然会被打进 bundle —— Phaser 的 Scene 是带副作用的类，
+    // 不能指望 Rollup 因为"数组里没有它"就把它抖掉；
+    // 关掉的实际收益是"关卡里没有任何路径能进到它"，不是那几 KB。
+    ...(DEBUG_PANEL_OPEN ? [DebugScene] : []),
     GalleryScene,
     EndingScene,
   ],

@@ -5,6 +5,14 @@
   "wait:1500",
   "shot:shots/audit/01-title.png",
 
+  "click-title:硬币",
+  "wait:800",
+  "shot:shots/audit/01b-title-credits.png",
+  "assert:__anJiao.titleCredits() === true",
+  "click-title:关闭制作信息",
+  "wait:600",
+  "assert:__anJiao.titleCredits() === false",
+
   "click-title:开始调查",
   "wait:1500",
   "shot:shots/audit/02-ch1-dock-opening-text.png",

@@ -4,11 +4,11 @@
   "eval:__anJiao.goto('warehouse_night')",
   "wait:800",
   "settle",
-  "shot:shots/p3d-01-round1.png",
+  "shot:shots/p3d/p3d-01-round1.png",
   "hold-item:bronze_emblem",
   "click-confront:chen",
   "settle",
-  "shot:shots/p3d-02-round2-no-card.png",
+  "shot:shots/p3d/p3d-02-round2-no-card.png",
   "eval:__anJiao.confront()",
   "hold-item:bronze_emblem",
   "click-confront:crate",
@@ -17,6 +17,6 @@
   "hold-item:bronze_emblem",
   "click-confront:chief",
   "settle",
-  "shot:shots/p3d-03-ending.png",
+  "shot:shots/p3d/p3d-03-ending.png",
   "eval:__anJiao.ending()"
 ]

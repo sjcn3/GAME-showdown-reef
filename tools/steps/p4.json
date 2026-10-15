@@ -23,7 +23,7 @@
   "assert:__anJiao.sfx().includes('ending')",
   "screen:Gallery",
   "wait:400",
-  "shot:shots/p4-01-gallery.png",
+  "shot:shots/p4/p4-01-gallery.png",
   "eval:__anJiao.gallery()",
   "assert:__anJiao.gallery().total === 6",
   "assert:__anJiao.gallery().unlocked.length === 1",
@@ -35,11 +35,11 @@
   "wait:400",
   "eval:__anJiao.gallery()",
   "assert:__anJiao.gallery().unlocked.length === 1",
-  "shot:shots/p4-02-gallery-after-reload.png",
+  "shot:shots/p4/p4-02-gallery-after-reload.png",
   "eval:__anJiao.unlock('torn_page','lost_emblem','broken_number','hollow_win','tipped_off')",
   "screen:Gallery",
   "wait:400",
   "eval:__anJiao.gallery()",
   "assert:__anJiao.gallery().unlocked.length === 6",
-  "shot:shots/p4-03-gallery-full.png"
+  "shot:shots/p4/p4-03-gallery-full.png"
 ]
