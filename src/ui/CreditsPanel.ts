@@ -36,7 +36,7 @@ const ROWS: readonly (readonly [string, string])[] = [
   ['剧 本', '豆包'],
   ['美 术', '通义Qwen Deepseek'],
   ['程 序', 'DeepseekV41flash'],
-  ['指导老师', '慕莎'],
+  ['指导老师', '无'],
   ['特别鸣谢', 'chatGPT '],
 ];
 
