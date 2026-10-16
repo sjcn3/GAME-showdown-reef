@@ -32,5 +32,18 @@
   "settle",
   "wait:600",
   "assert:__anJiao.scene() === 'bilge'",
+
+  "eval:__anJiao.goto('container_interior')",
+  "settle",
+  "wait:400",
+  "assert:__anJiao.state.hasFlag('crates_opened') === false",
+  "shot:shots/pickup/04-crate-sealed.png",
+  "hold-item:crowbar",
+  "click-spot:crates",
+  "settle",
+  "wait:700",
+  "assert:__anJiao.state.hasFlag('crates_opened') === true",
+  "shot:shots/pickup/05-crate-opened.png",
+
   "eval:__anJiao.wipeSave()"
 ]

@@ -160,7 +160,10 @@ export class ExploreScene extends Phaser.Scene {
       return;
     }
     this.art.clear();
-    painter(this.art, GAME_WIDTH, STAGE_HEIGHT, { has: (id) => gameState.has(id) });
+    painter(this.art, GAME_WIDTH, STAGE_HEIGHT, {
+      has: (id) => gameState.has(id),
+      flag: (id) => gameState.hasFlag(id),
+    });
   }
 
   /**
@@ -566,6 +569,9 @@ export class ExploreScene extends Phaser.Scene {
 
       case 'flag':
         gameState.setFlag(e.flag);
+        // 有些变化不是"东西没了"而是"东西变了"（X4：木箱被撬开），
+        // 那类分支只设 flag、不发道具 —— 不在这里重画，箱板就还是钉死的。
+        this.paintScene();
         return false;
 
       case 'openDoc':

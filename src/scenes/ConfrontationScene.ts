@@ -84,7 +84,12 @@ export class ConfrontationScene extends Phaser.Scene {
     const painter = PLACEHOLDER_PAINT['warehouse_night'];
     // 对峙用的这张图不吃 ctx（仓库夜里没有可捡的东西），但接口要求传一个。
     // 传真实状态而不是空壳：万一以后这张图也想跟着状态变，这里不用再改。
-    if (painter) painter(art, GAME_WIDTH, STAGE_HEIGHT, { has: (id) => gameState.has(id) });
+    if (painter) {
+      painter(art, GAME_WIDTH, STAGE_HEIGHT, {
+        has: (id) => gameState.has(id),
+        flag: (id) => gameState.hasFlag(id),
+      });
+    }
 
     // 第 2 组 B1/B2：会下的雨、会晃的湿地反光、会飘的尘埃
     addSceneAmbient(this, 'warehouse_night');
