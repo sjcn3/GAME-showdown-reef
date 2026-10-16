@@ -337,6 +337,53 @@ describe('分支判定 · pickBranch', () => {
     const effects = clickAt('container_interior', x + w / 2, y + hh / 2, state);
     expect(effects).toBe(cache.branches[0]!.effects);
   });
+
+  /**
+   * X1：拿着钥匙点底舱门锁，以前会弹「钥匙用在这上面不对」。
+   *
+   * 病灶不在锁上，在 `pickBranch` 的这条规则：
+   *   手持道具时，**跳过所有没有 needs 的分支**（本意是防「拿着撬棍点老周」
+   *   误触剧情）。而底舱门锁是唯一「钥匙在包里就够、不必拿在手里」的热点，
+   *   它的两条分支都没写 needs —— 于是手持钥匙时全部落空。
+   *
+   * 所以开锁那条必须显式写 `needs: 'hold_key'`。这组用例把三条路都钉住，
+   * 以后谁再顺手删掉 needs，这里会先红。
+   */
+  describe('X1 · 底舱门锁的三条路', () => {
+    const door = (): (typeof SCENES)[string]['hotspots'][number] =>
+      SCENES['corridor']!.hotspots.find((h) => h.id === 'bilge_door')!;
+
+    it('拿着钥匙点 → 开锁（而不是「用在这上面不对」）', () => {
+      const state = new GameState();
+      state.addItem('hold_key');
+      expect(pickBranch(door().branches, { state, held: 'hold_key' })).toBe(0);
+    });
+
+    it('钥匙在包里、没拿在手上 → 也放行', () => {
+      const state = new GameState();
+      state.addItem('hold_key');
+      expect(pickBranch(door().branches, { state, held: null })).toBe(2);
+    });
+
+    it('没钥匙 → 只是看一眼，不会开', () => {
+      const state = new GameState();
+      expect(pickBranch(door().branches, { state, held: null })).toBe(1);
+    });
+
+    it('拿着别的道具 → 不成立，落到「用在这上面不对」的兜底', () => {
+      const state = new GameState();
+      // 手持时所有没写 needs 的分支都被跳过，于是这里返回 -1 ——
+      // 这正是 X1 当初的样子，只不过当时玩家手里拿的是钥匙。
+      expect(pickBranch(door().branches, { state, held: 'crowbar' })).toBe(-1);
+    });
+
+    it('开锁之后真的进了底舱', () => {
+      const state = new GameState();
+      state.addItem('hold_key');
+      const [x, y, w, hh] = door().rect;
+      expect(run(clickAt('corridor', x + w / 2, y + hh / 2, state), state)).toBe('bilge');
+    });
+  });
 });
 
 describe('第一章 · 全流程可通', () => {

@@ -440,6 +440,23 @@ const captainCabin: SceneDef = {
 
 // ── 第二章 · 场景 4 · 走廊 ────────────────────────────────
 
+/**
+ * 开底舱门。**两条分支共用**（手持钥匙 / 钥匙在身上），别再抄一遍 ——
+ * 两支的台词与闸门必须永远一致，抄开之后改一处忘一处是必然的。
+ *
+ * 「要不要再找找？」先拦一下：保险柜没开就下去，会带着残缺的证据链进第三章。
+ */
+const BILGE_UNLOCK: readonly Effect[] = [
+  {
+    t: 'searchAgain',
+    chapter: 1,
+    then: [
+      { t: 'say', lines: ['钥匙插进去，锁开了。'] },
+      { t: 'goto', scene: 'bilge' },
+    ],
+  },
+];
+
 const corridor: SceneDef = {
   id: 'corridor',
   chapter: 1,
@@ -458,23 +475,20 @@ const corridor: SceneDef = {
       label: '底舱门锁',
       rect: [250, 420, 220, 420],
       branches: [
+        // 手持钥匙点锁 —— 玩家最自然的做法（先在道具栏拿起、再点目标）。
+        //
+        // 这一条**必须显式写出来**，不能指望下面那条兜底分支接住：
+        // `pickBranch` 有一条规则是「手持道具时跳过所有没有 needs 的分支」
+        // （为的是防「拿着撬棍点老周」误触剧情），代价就是这类
+        // 「钥匙在身上就够、不必拿在手里」的分支在手持时会全部落空 ——
+        // 玩家拿起钥匙去点锁，收到的却是「钥匙用在这上面不对」。
+        { needs: 'hold_key', effects: BILGE_UNLOCK },
         {
           when: (c) => !c.state.has('hold_key'),
           effects: [{ t: 'say', lines: ['挂锁很旧，但锁孔是干净的——最近常开。'] }],
         },
-        // 有钥匙也先拦一下：保险柜没开就下去，会带着残缺的证据链进第三章
-        {
-          effects: [
-            {
-              t: 'searchAgain',
-              chapter: 1,
-              then: [
-                { t: 'say', lines: ['钥匙插进去，锁开了。'] },
-                { t: 'goto', scene: 'bilge' },
-              ],
-            },
-          ],
-        },
+        // 钥匙在身上、但没拿在手里：也放行。多给一条路，不跟玩家较劲。
+        { effects: BILGE_UNLOCK },
       ],
     },
     {

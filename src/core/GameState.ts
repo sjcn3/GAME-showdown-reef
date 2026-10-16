@@ -40,7 +40,15 @@ export type Flag =
   /** 第三章 · 已申请支援 */
   | 'requested_backup'
   /** 第三章 · 已进入仓库 */
-  | 'entered_warehouse';
+  | 'entered_warehouse'
+  /**
+   * 玩法教学已经弹过。
+   *
+   * 存在存档里而不是只放内存：教学挂在第一章开场那段旁白之后，
+   * 而「续玩」会重播一次开场旁白 —— 没有一个落盘的标记，
+   * 玩家每次续玩都要再关一遍同一个面板。
+   */
+  | 'tutorial_seen';
 
 export interface GameSnapshot {
   readonly items: readonly ItemId[];

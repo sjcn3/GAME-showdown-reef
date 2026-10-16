@@ -8,7 +8,25 @@
 
 import Phaser from 'phaser';
 
+import type { ItemId } from '../data/items';
+
 type G = Phaser.GameObjects.Graphics;
+
+/**
+ * 绘制时的游戏状态（X3）。
+ *
+ * 场景大图是按 `paintKey` 查表画一次的静态图，画家**看不见状态** ——
+ * 于是水里的撬棍、消防栓箱里的钥匙，在玩家把它们捡走之后还画在原地。
+ * 玩家回头看一眼：东西还在，那刚才捡的是什么？
+ *
+ * 只给画家开一个 `has()` 的口子，不把整个 GameState 递进去：
+ * 画家需要的全部信息就是「这件东西还在不在原地」。
+ * 口子开大了，这张静态图迟早会跟着回合数、破绽数一起变样。
+ */
+export interface PaintCtx {
+  /** 这件道具已经在玩家身上（= 不该再画在场景里） */
+  has(id: ItemId): boolean;
+}
 
 // ── 小工具 ──────────────────────────────────────────────
 
@@ -132,7 +150,7 @@ function paintZhou(g: G): void {
   //                                           差 4px 就会在头顶和脸之间留出一道黑缝
 }
 
-function paintDockExterior(g: G, w: number, _h: number): void {
+function paintDockExterior(g: G, w: number, _h: number, ctx: PaintCtx): void {
   // 天空：压得很低的黄昏
   bands(g, 0, 0, w, 500, [0x1b2024, 0x22262a, 0x2b2c2c, 0x343330, 0x3d372e]);
 
@@ -201,13 +219,16 @@ function paintDockExterior(g: G, w: number, _h: number): void {
   rect(g, 40, 878, 250, 3, 0x3a4a52, 0.7);
   rect(g, 70, 930, 170, 2, 0x2e3f47, 0.9);
   rect(g, 110, 972, 120, 2, 0x2e3f47, 0.7);
-  // 水里的撬棍
-  g.lineStyle(9, 0x6b6252, 1);
-  g.lineBetween(104, 996, 226, 902);
-  g.lineStyle(9, 0x8a8474, 1);
-  g.lineBetween(104, 996, 140, 968);
-  g.lineStyle(3, 0x4a463c, 1);
-  g.lineBetween(206, 916, 226, 902);
+  // 水里的撬棍 —— 捡走之后就不再画（X3）。
+  // 积水本身留着：少一根棍子，水面该有的反光不能跟着一起消失。
+  if (!ctx.has('crowbar')) {
+    g.lineStyle(9, 0x6b6252, 1);
+    g.lineBetween(104, 996, 226, 902);
+    g.lineStyle(9, 0x8a8474, 1);
+    g.lineBetween(104, 996, 140, 968);
+    g.lineStyle(3, 0x4a463c, 1);
+    g.lineBetween(206, 916, 226, 902);
+  }
 
   // 老周脚边的薄荷烟蒂（热点 cigarette：[620,984,68,30]）
   // 原来只画了 18×5px 一条，对比度 9.2:1 是全场最亮的静物、却小到找不着 ——
@@ -442,7 +463,7 @@ function paintCaptainCabin(g: G, w: number, h: number): void {
 
 // ── 场景 4 · 走廊（第二章）────────────────────────────────
 
-function paintCorridor(g: G, w: number, h: number): void {
+function paintCorridor(g: G, w: number, h: number, ctx: PaintCtx): void {
   rect(g, 0, 0, w, h, 0x0b1014);
 
   // 一点透视：正面墙 + 左右墙 + 天花 + 地面
@@ -496,11 +517,14 @@ function paintCorridor(g: G, w: number, h: number): void {
   g.lineTo(612, 528);
   g.lineTo(592, 618);
   g.strokePath();
-  // 玻璃后面没有水带，只有一把钥匙
-  rect(g, 612, 540, 26, 7, 0x8a7430);
-  g.fillStyle(0x8a7430, 1);
-  g.fillCircle(608, 543, 8);
-  rect(g, 632, 547, 5, 16, 0x8a7430);
+  // 玻璃后面没有水带，只有一把钥匙 —— 拿走后就不再画（X3）。
+  // 箱子、玻璃和那道裂痕都留着：变的是"里面空了"，不是"箱子没了"。
+  if (!ctx.has('hold_key')) {
+    rect(g, 612, 540, 26, 7, 0x8a7430);
+    g.fillStyle(0x8a7430, 1);
+    g.fillCircle(608, 543, 8);
+    rect(g, 632, 547, 5, 16, 0x8a7430);
+  }
 
   // 正面铁门（热点 bilge_door：[250,420,220,420]）
   // 同样是"比墙亮一点点"就等于不存在：0x161e23 对正面墙 0x121a1f = 1.05:1，
@@ -896,7 +920,9 @@ function paintWarehouseNight(g: G, w: number, h: number): void {
 
 // ── 注册表 ──────────────────────────────────────────────
 
-export const PLACEHOLDER_PAINT: Readonly<Record<string, (g: G, w: number, h: number) => void>> = {
+export const PLACEHOLDER_PAINT: Readonly<
+  Record<string, (g: G, w: number, h: number, ctx: PaintCtx) => void>
+> = {
   dock_exterior: paintDockExterior,
   container_interior: paintContainerInterior,
   captain_cabin: paintCaptainCabin,

@@ -34,6 +34,8 @@ import { InventoryBar } from '../ui/InventoryBar';
 import { PasswordPad } from '../ui/PasswordPad';
 import { TextBox } from '../ui/TextBox';
 import { Toast } from '../ui/Toast';
+import { TutorialButton } from '../ui/TutorialButton';
+import { TutorialPanel } from '../ui/TutorialPanel';
 import { FONT_SANS } from '../ui/theme';
 
 /** 场景切换的淡入淡出时长（C4）。硬切在手机上像是画面闪了一下。 */
@@ -53,6 +55,10 @@ export class ExploreScene extends Phaser.Scene {
   private pad!: PasswordPad;
   private evidence!: EvidenceLog;
   private back!: BackButton;
+  private tutorial!: TutorialPanel;
+  private tutorialBtn!: TutorialButton;
+  /** 场景底图。留着引用是为了捡到东西之后能整张重画（X3）。 */
+  private art!: Phaser.GameObjects.Graphics;
 
   /** 有阻塞式效果在跑（防止连点触发两次剧情） */
   private busy = false;
@@ -79,10 +85,8 @@ export class ExploreScene extends Phaser.Scene {
   create(): void {
     this.cameras.main.setBackgroundColor(COLORS.bg);
 
-    const art = this.add.graphics();
-    const painter = PLACEHOLDER_PAINT[this.def.paintKey];
-    if (painter) painter(art, GAME_WIDTH, STAGE_HEIGHT);
-    else console.warn(`[ExploreScene] 场景 ${this.def.id} 没有占位绘制：${this.def.paintKey}`);
+    this.art = this.add.graphics();
+    this.paintScene();
 
     // 第 2 组 B1/B2：会下的雨、会呼吸的灯、会晃的水面、会飘的尘埃。
     // 挂在这一层是安全的 —— 动效层深度 20~24，在所有 UI（400 起）之下。
@@ -106,6 +110,12 @@ export class ExploreScene extends Phaser.Scene {
       () => this.covered(),
       () => this.scene.start('Title'),
     );
+    this.tutorial = new TutorialPanel(this);
+    this.tutorialBtn = new TutorialButton(
+      this,
+      () => this.covered(),
+      () => this.tutorial.open(),
+    );
 
     this.bar.refresh(gameState);
     this.wireInput();
@@ -126,7 +136,48 @@ export class ExploreScene extends Phaser.Scene {
     saveProgress(this.def.id, gameState.snapshot());
 
     const queued: Effect[] = firstVisit && this.def.onEnter ? [...this.def.onEnter] : [];
-    if (queued.length > 0) void this.run(queued);
+    // 教学挂在开场旁白**之后**：引子还没读完就盖一张面板上去，
+    // 玩家第一眼看到的是说明书，不是故事。
+    if (queued.length > 0) void this.run(queued).then(() => this.maybeTeach());
+    else this.maybeTeach();
+  }
+
+  /**
+   * 整张重画场景底图（X3）。
+   *
+   * 场景图是按 `paintKey` 画一次的静态图，而「水里的撬棍」「箱子里的钥匙」
+   * 是画在里面的 —— 捡走之后不重画，东西就还留在原地。
+   * 画家从 `ctx` 里问一句「这件东西还在不在」，这里负责在状态变了之后
+   * 把它再问一遍。
+   *
+   * 重画的是底图这一层；雨、尘埃、人物都是各自独立的层（`addSceneAmbient`
+   * / `addSceneFigures`），不受影响。
+   */
+  private paintScene(): void {
+    const painter = PLACEHOLDER_PAINT[this.def.paintKey];
+    if (!painter) {
+      console.warn(`[ExploreScene] 场景 ${this.def.id} 没有占位绘制：${this.def.paintKey}`);
+      return;
+    }
+    this.art.clear();
+    painter(this.art, GAME_WIDTH, STAGE_HEIGHT, { has: (id) => gameState.has(id) });
+  }
+
+  /**
+   * 首段旁白之后弹一次玩法教学（X2）。
+   *
+   * 「只弹一次」靠存档里的 `tutorial_seen`：续玩会重播本章的 onEnter
+   * （见 `GameState.forgetVisited`），标记不落盘的话，每次续玩都要
+   * 再关一遍同一个面板。
+   *
+   * 这里必须自己再存一次档：`run()` 的落盘发生在上面的 `.then` 之前，
+   * 那次快照里还没有这个标记。
+   */
+  private maybeTeach(): void {
+    if (gameState.hasFlag('tutorial_seen')) return;
+    gameState.setFlag('tutorial_seen');
+    saveProgress(this.def.id, gameState.snapshot());
+    this.tutorial.open();
   }
 
   // ── 输入 ─────────────────────────────────────────────
@@ -152,7 +203,11 @@ export class ExploreScene extends Phaser.Scene {
   }
 
   private onDown(p: Phaser.Input.Pointer): void {
-    // 浮层优先级：章节卡 > 密码盘 > 文档 > 文本框（都是从最上面那层开始吃点击）
+    // 浮层优先级：教学 > 章节卡 > 密码盘 > 文档 > 文本框（都是从最上面那层开始吃点击）
+    if (this.tutorial.isActive) {
+      // 同证据列表：关闭由浮层自己的全屏背板判定，这里只负责把点击栏在外面。
+      return;
+    }
     if (this.card.isActive) {
       this.card.tap();
       return;
@@ -177,6 +232,8 @@ export class ExploreScene extends Phaser.Scene {
     // 但 Phaser 的对象输入不看深度，所以这里必须替它挡掉 —— 否则浮层开着时
     // 点右上角会既关浮层、又 arm 一次返回。
     if (this.back.hitTest(p.x, p.y)) return;
+    // 左上角「?」（X2）：同返回按钮，自己挂 interactive，这里替它挡掉
+    if (this.tutorialBtn.hitTest(p.x, p.y)) return;
     if (this.busy) return;
 
     // 底部道具栏自己处理点击
@@ -284,7 +341,8 @@ export class ExploreScene extends Phaser.Scene {
       this.pad.isActive ||
       this.evidence.isActive ||
       this.doc.isActive ||
-      this.textBox.isActive
+      this.textBox.isActive ||
+      this.tutorial.isActive
     );
   }
 
@@ -345,6 +403,21 @@ export class ExploreScene extends Phaser.Scene {
     return this.pad?.isActive ? this.pad.devKeys() : null;
   }
 
+  /** 仅供开发钩子：教学浮层开着时给出「知道了」的中心点，没开就是 null。 */
+  devTutorial(): { close: { x: number; y: number } } | null {
+    return this.tutorial?.devPanel() ?? null;
+  }
+
+  /** 仅供开发钩子：左上角「?」按钮的中心点（X2）。 */
+  devTutorialButton(): { x: number; y: number } {
+    return this.tutorialBtn.devState();
+  }
+
+  /** 仅供开发钩子：教学浮层累计弹出过几次（X2）。 */
+  devTutorialOpens(): number {
+    return this.tutorial.devOpens();
+  }
+
   /**
    * 仅供开发钩子：场景是否已经"安静"下来。
    *
@@ -358,6 +431,7 @@ export class ExploreScene extends Phaser.Scene {
     doc: boolean;
     evidence: boolean;
     backArmed: boolean;
+    tutorial: boolean;
   } {
     return {
       busy: this.busy,
@@ -366,6 +440,7 @@ export class ExploreScene extends Phaser.Scene {
       doc: this.doc.isActive,
       evidence: this.evidence.isActive,
       backArmed: this.back.isArmed,
+      tutorial: this.tutorial.isActive,
     };
   }
 
@@ -476,6 +551,9 @@ export class ExploreScene extends Phaser.Scene {
       case 'give': {
         if (gameState.addItem(e.item)) {
           this.refreshBar();
+          // 东西进了包，场景里那件就得消失（X3）。画家靠 ctx.has() 判断，
+          // 但底图是画一次的静态图 —— 不重画，画面上那根撬棍还在水里。
+          this.paintScene();
           this.toast.show(`获得「${ITEMS[e.item].name}」`);
           // 只给「线索」和「关键道具」配提示音；工具与附属物证只是一次普通交互，
           // 上面那句 hotspot 已经响过了，再叠一层反而分不清轻重。

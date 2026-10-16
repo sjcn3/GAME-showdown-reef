@@ -119,6 +119,21 @@ export interface DevApi {
    * 不在探索/对峙场景时返回 null。
    */
   ripples(): number | null;
+  /**
+   * 玩法教学浮层开着时的「知道了」中心点，没开返回 null（X2）。
+   * 脚本因此能断言"弹出来了没有"，不必靠截图猜。
+   */
+  tutorial(): { close: { x: number; y: number } } | null;
+  /** 左上角「?」按钮的中心点（X2）。不在探索场景时返回 null。 */
+  tutorialButton(): { x: number; y: number } | null;
+  /**
+   * 教学浮层累计弹出过几次（X2）。
+   *
+   * settle 会替脚本关掉开着的浮层，所以"关完之后再问开着没有"是恒真的假绿；
+   * 计数不会被关掉抹去 —— 自动弹出过一次，这里就必须 >= 1。
+   * 不在探索场景时返回 null。
+   */
+  tutorialOpens(): number | null;
 }
 
 /**
@@ -135,6 +150,8 @@ export interface IdleInfo {
   readonly doc: boolean;
   readonly evidence: boolean;
   readonly backArmed: boolean;
+  /** 玩法教学浮层（X2）。开着时场景不算安静 —— 否则脚本会隔着它继续点 */
+  readonly tutorial: boolean;
 }
 
 /** 标题页给开发钩子的口子。 */
@@ -184,6 +201,12 @@ interface ExploreQuery {
   devRippleCount?: () => number;
   /** 直接弹一次章节卡（烟测专用，不推进章节） */
   devChapterCard?: (index: number) => boolean;
+  /** 玩法教学浮层开着时给出「知道了」的位置（X2） */
+  devTutorial?: () => { close: { x: number; y: number } } | null;
+  /** 左上角「?」按钮的中心点（X2） */
+  devTutorialButton?: () => { x: number; y: number };
+  /** 教学浮层累计弹出次数（X2） */
+  devTutorialOpens?: () => number;
 }
 
 /** ConfrontationScene 同样只开一个查询口 */
@@ -393,13 +416,22 @@ export function installDevHook(
       const close = toPage(r.close);
       if (!close) return null;
       return { rows: toPageMap(r.rows) ?? {}, close };
-    },    back: () => {
+    },
+    back: () => {
       const b = (explore() ?? confrontScene())?.devBack?.();
       if (!b) return null;
       const p = toPage(b);
       return p ? { ...p, armed: b.armed } : null;
     },
     ripples: () => (explore() ?? confrontScene())?.devRippleCount?.() ?? null,
+    tutorial: () => {
+      const t = explore()?.devTutorial?.();
+      if (!t) return null;
+      const close = toPage(t.close);
+      return close ? { close } : null;
+    },
+    tutorialButton: () => toPage(explore()?.devTutorialButton?.() ?? null),
+    tutorialOpens: () => explore()?.devTutorialOpens?.() ?? null,
   };
 
   (window as unknown as { __anJiao: DevApi }).__anJiao = api;

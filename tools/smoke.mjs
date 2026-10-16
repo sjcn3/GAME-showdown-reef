@@ -19,6 +19,8 @@
  *   click-item:<道具id>   按名字点道具栏格子（坐标问页面要，脚本不写死）
  *   hold-item:<道具id>    同上，但幂等：已经拿在手里就不点（再点一下会取消选中）
  *   click-spot:<热点id>   按名字点场景热点
+ *   click-tutorial        点教学浮层的「知道了」（X2；没弹出来就报错）
+ *   tutorial-button       点左上角的「?」（X2）
  *   drop-item            点一下空地，把手里的道具放下（成功用过道具后它还在手上）
  *   evidence             点开道具栏左上角的「证据」列表，并确认它真的开了（C1）
  *   evidence-close       关掉证据列表，并确认它真的关了（C1）
@@ -475,6 +477,33 @@ for (const raw of opts.steps) {
         await tapAt(at.x, at.y);
         stepReport.push({ step: raw, ok: true, value: `${arg} @ ${at.x},${at.y}` });
       }
+    } else if (kind === 'click-tutorial') {
+      // 教学浮层上的「知道了」（X2）。坐标由浮层自己报 —— 只有开着才有点可点，
+      // 所以「点不到」本身就是一条有力的断言：说明它根本没弹出来。
+      const r = await cdp.send('Runtime.evaluate', {
+        expression: 'JSON.stringify(window.__anJiao && window.__anJiao.tutorial())',
+        returnByValue: true,
+      });
+      const t = r.result?.value ? JSON.parse(r.result.value) : null;
+      if (!t) {
+        stepReport.push({ step: raw, ok: false, error: '教学浮层没开着' });
+      } else {
+        await tapAt(t.close.x, t.close.y);
+        stepReport.push({ step: raw, ok: true, value: `知道了 @ ${t.close.x},${t.close.y}` });
+      }
+    } else if (kind === 'tutorial-button') {
+      // 左上角「?」（X2）
+      const r = await cdp.send('Runtime.evaluate', {
+        expression: 'JSON.stringify(window.__anJiao && window.__anJiao.tutorialButton())',
+        returnByValue: true,
+      });
+      const at = r.result?.value ? JSON.parse(r.result.value) : null;
+      if (!at) {
+        stepReport.push({ step: raw, ok: false, error: '不在探索场景，拿不到左上角「?」' });
+      } else {
+        await tapAt(at.x, at.y);
+        stepReport.push({ step: raw, ok: true, value: `? @ ${at.x},${at.y}` });
+      }
     } else if (kind === 'tap-center') {
       const at = await clickCenter();
       if (!at) stepReport.push({ step: raw, ok: false, error: '拿不到画布中心' });
@@ -545,7 +574,7 @@ for (const raw of opts.steps) {
       for (; clicks < limit; clicks++) {
         const r = await cdp.send('Runtime.evaluate', {
           expression:
-            'JSON.stringify({ idle: window.__anJiao && window.__anJiao.idle(), at: window.__anJiao && window.__anJiao.neutral(), cf: window.__anJiao && window.__anJiao.confront(), en: window.__anJiao && window.__anJiao.ending() })',
+            'JSON.stringify({ idle: window.__anJiao && window.__anJiao.idle(), at: window.__anJiao && window.__anJiao.neutral(), tu: window.__anJiao && window.__anJiao.tutorial(), cf: window.__anJiao && window.__anJiao.confront(), en: window.__anJiao && window.__anJiao.ending() })',
           returnByValue: true,
         });
         const probe = r.result?.value ? JSON.parse(r.result.value) : null;
@@ -570,17 +599,25 @@ for (const raw of opts.steps) {
           }
           await tapAt(probe.cf.neutral.x, probe.cf.neutral.y);
           await sleep(320);
+        } else if (probe?.tu) {
+          // 玩法教学浮层开着（X2）：按它自己的「知道了」关掉。
+          // 不能拿场景上的空地乱点 —— 那块空地正是浮层的背板，
+          // 点下去虽然也能关，但脚本就永远说不清"到底是关掉了、还是点空了"。
+          await tapAt(probe.tu.close.x, probe.tu.close.y);
+          await sleep(320);
         } else if (probe?.idle && probe?.at) {
           seen = probe.idle;
           // 证据列表（C1）与"返回按钮待确认"（C2）都不算 busy，但它们同样在吃点击 ——
           // 漏掉这两项，settle 会对着一个开着的列表继续点，把列表当成场景在推。
+          // 教学浮层（X2）同理。
           if (
             !probe.idle.busy &&
             !probe.idle.textBox &&
             !probe.idle.card &&
             !probe.idle.doc &&
             !probe.idle.evidence &&
-            !probe.idle.backArmed
+            !probe.idle.backArmed &&
+            !probe.idle.tutorial
           ) {
             quiet = true;
             break;
